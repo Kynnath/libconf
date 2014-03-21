@@ -35,6 +35,8 @@ namespace cfg
             bool m_bool;
             std::vector<Property> m_section;
 
+            Property const& GetProperty( std::string const& i_name ) const;
+
         public:
             Property() = default;
             Property( std::string const& i_filename );
@@ -43,6 +45,8 @@ namespace cfg
             Property( std::string const& i_name, float const& i_value );
             Property( std::string const& i_name, bool const& i_value );
             Property( std::string const& i_name, std::vector<Property> const& i_value );
+
+            void Print( int const& i_indent = 0 ) const;
 
             std::string const& GetStringProperty( std::string const& i_name ) const;
             int const& GetIntProperty( std::string const& i_name ) const;
