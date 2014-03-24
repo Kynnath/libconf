@@ -7,6 +7,7 @@
 
 #include "Property.hpp"
 
+#include <algorithm>
 #include <cassert>
 #include <fstream>
 #include <iostream>
@@ -15,7 +16,7 @@
 
 namespace cfg
 {
-    char const k_reservedCharacter[][2] =
+    char const k_reserved[][2] =
     {
         ";",
         "[",
@@ -26,7 +27,7 @@ namespace cfg
         ":"
     };
 
-    char const k_reservedValues[][6] =
+    char const k_reservedValue[][6] =
     {
         "true",
         "false"
@@ -43,34 +44,120 @@ namespace cfg
         Scope
     };
 
+    enum ReservedValue
+    {
+        True,
+        False
+    };
+
     typedef std::vector< std::string > TokenList;
 
+    bool LineIsAssignment( TokenList const& i_line );
     bool LineIsAssignment( TokenList const& i_line )
     {
         for ( auto const& token : i_line )
         {
-            if ( token.find( k_reservedCharacter[ Assignment ] ) != std::string::npos )
+            if ( token.find( k_reserved[ Assignment ] ) != std::string::npos )
             {
                 return true;
             }
         }
+        return false;
     }
 
-    std::string PropertyName( TokenList const& i_line )
+    bool IsInteger( std::string const& i_string );
+    bool IsInteger( std::string const& i_string )
     {
-        if ( i_line.size() > 1 )
+        if ( !i_string.empty() )
         {
-            return i_line.front();
+            auto iter ( i_string.begin() );
+            if ( *iter == '-' || ( *iter > '0' && *iter < '9' ) )
+            {
+                auto const end ( i_string.end() );
+                ++iter;
+                while ( iter != end )
+                {
+                    if ( *iter < '0' || *iter > '9' )
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsFloat( std::string const& i_string );
+    /* Function will detect floating point numbers of the form [-]1.234
+     * There has to be a digit before the decimal point, and there may be a
+     * minus sign.
+     */
+    bool IsFloat( std::string const& i_string )
+    {
+        if ( !i_string.empty() )
+        {
+            auto iter ( i_string.begin() );
+            if ( *iter == '-' )
+            {
+                ++iter;
+            }
+            if ( *iter > '0' && *iter < '9' )
+            {
+                ++iter;
+            }
+            else
+            {
+                return false;
+            }
+            auto const end ( i_string.end() );
+            if ( std::count( iter, end, '.' ) != 1 )
+            {
+                return false;
+            }
+            while ( iter != end )
+            {
+                if ( *iter < '0' && *iter > '9' )
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    Property::Type AssignmentType( TokenList const& i_line );
+    Property::Type AssignmentType( TokenList const& i_line )
+    {
+        if ( i_line.back() == "true" || i_line.back() == "false" )
+        {
+            return Property::Bool;
+        }
+        else if ( IsInteger( i_line.back() ) )
+        {
+            return Property::Int;
+        }
+        else if ( IsFloat( i_line.back() ) )
+        {
+            return Property::Float;
         }
         else
         {
-            return i_line.front().substr( 0, i_line.front().find( k_reservedCharacter[ Assignment ] ) );
+            return Property::String;
         }
     }
 
+    std::string PropertyName( TokenList const& i_line );
+    std::string PropertyName( TokenList const& i_line )
+    {
+        return i_line.front().substr( 0, i_line.front().find( k_reserved[ Assignment ] ) );
+    }
+
+    std::string PropertyValue( TokenList const& i_line );
     std::string PropertyValue( TokenList const& i_line )
     {
-        int assignmentPos ( i_line.back().find( k_reservedCharacter[ Assignment ] ) );
+        std::string::size_type assignmentPos ( i_line.back().find( k_reserved[ Assignment ] ) );
         if ( assignmentPos == std::string::npos )
         {
             return i_line.back();
@@ -79,6 +166,23 @@ namespace cfg
         {
             return i_line.back().substr( assignmentPos+1 );
         }
+    }
+
+    TokenList SplitPropertyName( std::string const& i_name );
+    TokenList SplitPropertyName( std::string const& i_name )
+    {
+        TokenList propertyName;
+        std::string::size_type from ( 0 );
+        std::string::size_type to ( 0 );
+
+        while ( to != std::string::npos )
+        {
+            to = i_name.find( k_reserved[ Scope ], from );
+            propertyName.push_back( i_name.substr( from, to - from ) );
+            from = to + 1;
+        }
+
+        return propertyName;
     }
 
     Property::Property( std::string const& i_filename )
@@ -119,10 +223,10 @@ namespace cfg
         // For each line, determine if each line is a property or section
         for ( auto const& line : lineTokens )
         {
-            if ( line.front().find( k_reservedCharacter[ SectionStart ] ) == 0 )
+            if ( line.front().find( k_reserved[ SectionStart ] ) == 0 )
             {
                 // New section
-                assert( line.front().find( k_reservedCharacter[ SectionEnd ] ) == line.front().size()-1 )  ;
+                assert( line.front().find( k_reserved[ SectionEnd ] ) == line.front().size()-1 )  ;
                 if ( !withinScope )
                 {
                     stack.pop_back();
@@ -131,25 +235,40 @@ namespace cfg
                 stack.push_back( &( stack.back()->m_section.back() ) );
                 withinScope = false;
             }
-            else if ( line.front() == k_reservedCharacter[ GroupStart ] )
+            else if ( line.front() == k_reserved[ GroupStart ] )
             {
                 withinScope = true;
             }
-            else if ( line.front() == k_reservedCharacter[ GroupEnd ] )
+            else if ( line.front() == k_reserved[ GroupEnd ] )
             {
                 stack.pop_back();
                 withinScope = true;
             }
             else if ( LineIsAssignment( line ) )
             {
-                stack.back()->m_section.push_back( Property( PropertyName( line ), PropertyValue( line ) ) );
+                Property::Type type ( AssignmentType( line ) );
+                if ( type == Property::Int )
+                {
+                    stack.back()->m_section.push_back( Property( PropertyName( line ), std::stoi( PropertyValue( line ) ) ) );
+                }
+                else if ( type == Property::Float )
+                {
+                    stack.back()->m_section.push_back( Property( PropertyName( line ), std::stof( PropertyValue( line ) ) ) );
+                }
+                else if ( type == Property::Bool )
+                {
+                    stack.back()->m_section.push_back( Property( PropertyName( line ), PropertyValue( line ) == "true" ) );
+                }
+                else
+                {
+                    stack.back()->m_section.push_back( Property( PropertyName( line ), PropertyValue( line ) ) );
+                }
             }
-            else if ( line.front().substr( 0, 1 ) == k_reservedCharacter[ Comment ] )
+            else if ( line.front().substr( 0, 1 ) == k_reserved[ Comment ] )
             {
                 continue;
             }
         }
-
     }
 
     Property::Property( std::string const& i_name, std::string const& i_value )
@@ -199,28 +318,23 @@ namespace cfg
 
     Property const& Property::GetProperty( std::string const& i_name ) const
     {
-        int first ( 0 );
-        int index ( int( i_name.find( k_reservedCharacter[ Scope ] ) ) );
+        TokenList propertyName( SplitPropertyName( i_name ) );
+
         Property const* currentProp ( this );
-        while( index != int( std::string::npos ) )
+        for ( auto const& name : propertyName )
         {
-            for ( auto iter ( currentProp->m_section.begin() ), end( currentProp->m_section.end() ); iter != end; ++iter )
+            for( auto const& property : currentProp->m_section )
             {
-                if ( iter->m_name == i_name.substr( (long long unsigned int)first, (long long unsigned int)index ) )
+                if ( name == property.m_name )
                 {
-                    currentProp = &(*iter);
-                    first = index+1;
-                    index = int( i_name.find( k_reservedCharacter[ Scope ], (long long unsigned int)first ) );
+                    currentProp = &property;
                     break;
                 }
             }
         }
-        if ( currentProp->m_name != i_name.substr( (long long unsigned int)first ) )
-        {
-            throw std::out_of_range( "Missing Property" );
-        }
         return *currentProp;
     }
+
     std::string const& Property::GetStringProperty( std::string const& i_name ) const
     {
         return GetProperty( i_name ).m_string;
@@ -273,7 +387,24 @@ namespace cfg
 
     void Property::Print( int const& i_indent ) const
     {
-        std::cout << std::string( i_indent*4, ' ' ) << m_name << std::endl;
+        std::cout << std::string( std::string::size_type( i_indent*4 ), ' ' ) << m_name;
+        if ( m_type == Property::Int )
+        {
+            std::cout << " = " << m_int;
+        }
+        if ( m_type == Property::Float )
+        {
+            std::cout << " = " << m_float;
+        }
+        if ( m_type == Property::Bool )
+        {
+            std::cout << " = " << m_bool;
+        }
+        if ( m_type == Property::String )
+        {
+            std::cout << " = " << m_string;
+        }
+        std::cout << std::endl;
         for ( auto const& property : m_section )
         {
             property.Print( i_indent+1 );
