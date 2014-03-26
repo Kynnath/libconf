@@ -52,6 +52,12 @@ namespace cfg
         False
     };
 
+    enum ReservedValue
+    {
+        True,
+        False
+    };
+
     typedef std::vector< std::string > TokenList;
 
     bool LineIsAssignment( TokenList const& i_line );
