@@ -66,8 +66,8 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a: ${OBJECTFILES}
 
 ${OBJECTDIR}/src/Property.o: src/Property.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/Property.o src/Property.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Property.o src/Property.cpp
 
 # Subprojects
 .build-subprojects:
