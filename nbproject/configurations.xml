@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>src/ConfigParser.hpp</itemPath>
+      <itemPath>src/Property.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -15,7 +16,6 @@
                    projectFiles="true">
       <itemPath>src/ConfigParser.cpp</itemPath>
       <itemPath>src/Property.cpp</itemPath>
-      <itemPath>src/Property.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"

@@ -307,36 +307,6 @@ namespace cfg
         return tokens;
     }
 
-    void ReadSection( std::vector< std::string >::const_iterator & io_token );
-    void ReadSection( std::vector< std::string >::const_iterator & io_token )
-    {
-        ++io_token;
-        std::string sectionName ( *io_token );
-        ++io_token;
-        assert( *io_token == k_reserved[ SectionEnd ] );
-        ++io_token;
-        assert( *io_token == k_reserved[ Newline ] );
-        ++io_token;
-        if ( *io_token == k_reserved[ GroupStart ] )
-        {
-
-        }
-        //while ( *io_token != k_reserved[ SectionStart ] )
-
-
-    }
-
-    Group BuildSyntaxTree( std::vector< std::string > const& i_tokens );
-    /*
-     * Determine whether each line is an assignment or section/group declaration
-     * Add it to a tree structure holding this information
-     */
-    Group BuildSyntaxTree( std::vector< std::string > const& i_tokens )
-    {
-
-
-    }
-
     Config::Config( std::string const& i_filename )
         : m_type ( Config::File )
         , m_name ( i_filename )
@@ -346,15 +316,15 @@ namespace cfg
         , m_bool ()
         , m_section ()
     {
-        // Break File into tokens
+        // Lexical Analysis
         std::vector< std::string > tokens ( TokenizeFile( i_filename ) );
-//        for ( auto const& token : tokens )
-//        {
-//            std::cout << token << " ";
-//        }
-//        std::cout << std::endl;
+
         // Syntactic Analysis
         ConfigAST syntaxTree ( tokens );
+        syntaxTree.Print();
+
+        // Semantic Analysis
+
 
         // Break file into tokens, separated by line
         std::vector< TokenList > lineTokens;

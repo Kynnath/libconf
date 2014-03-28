@@ -26,7 +26,7 @@ namespace cfg
 
     void Assignment::Print( int const& i_indent ) const
     {
-        std::cout << std::string( size_t( i_indent ), '\t' ) << m_name << " = " << m_value << std::endl;
+        std::cout << std::string( size_t( 4*i_indent ), ' ' ) << m_name << " = " << m_value << std::endl;
     }
 
     Group::Group( std::string const& i_name )
@@ -35,7 +35,30 @@ namespace cfg
     {}
 
     void Group::Print( int const& i_indent ) const
-    {}
+    {
+        std::cout << std::string( size_t( 4*i_indent ), ' ' ) << "[" << m_name << "]" << std::endl;
+        bool isScoped ( false );
+        for ( auto const& property : m_lines )
+        {
+            if ( property->m_type == Property::Group )
+            {
+                isScoped = true;
+                break;
+            }
+        }
+        if ( isScoped )
+        {
+            std::cout << std::string( size_t( 4*i_indent ), ' ' ) << "{" << std::endl;
+        }
+        for ( auto const& property : m_lines )
+        {
+            property->Print( i_indent+1 );
+        }
+        if ( isScoped )
+        {
+            std::cout << std::string( size_t( 4*i_indent ), ' ' ) << "}" << std::endl;
+        }
+    }
 
     Assignment ReadAssignment( std::vector<std::string>::const_iterator & io_iter )
     {
@@ -114,6 +137,14 @@ namespace cfg
             {
                 m_root.m_lines.push_back( new Assignment( ReadAssignment( iter ) ) );
             }
+        }
+    }
+
+    void ConfigAST::Print() const
+    {
+        for ( auto const& property : m_root.m_lines )
+        {
+            property->Print( 0 );
         }
     }
 }
