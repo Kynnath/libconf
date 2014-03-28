@@ -13,6 +13,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include "ConfigParser.hpp"
 
 namespace cfg
 {
@@ -25,7 +26,9 @@ namespace cfg
         "}",
         "=",
         ":",
-        "\""
+        "\"",
+        "\n",
+        "\\"
     };
 
     char const k_reservedValue[][6] =
@@ -43,7 +46,9 @@ namespace cfg
         GroupEnd,
         Assignment,
         Scope,
-        Quote
+        Quote,
+        Newline,
+        Escape
     };
 
     enum ReservedValue
@@ -91,7 +96,8 @@ namespace cfg
     }
 
     bool IsFloat( std::string const& i_string );
-    /* Function will detect floating point numbers of the form [-]1.234
+    /*
+     * Function will detect floating point numbers of the form [-]1.234
      * There has to be a digit before the decimal point, and there may be a
      * minus sign.
      */
@@ -129,24 +135,24 @@ namespace cfg
         return false;
     }
 
-    Property::Type AssignmentType( TokenList const& i_line );
-    Property::Type AssignmentType( TokenList const& i_line )
+    Config::Type AssignmentType( TokenList const& i_line );
+    Config::Type AssignmentType( TokenList const& i_line )
     {
         if ( i_line.back() == "true" || i_line.back() == "false" )
         {
-            return Property::Bool;
+            return Config::Bool;
         }
         else if ( IsInteger( i_line.back() ) )
         {
-            return Property::Int;
+            return Config::Int;
         }
         else if ( IsFloat( i_line.back() ) )
         {
-            return Property::Float;
+            return Config::Float;
         }
         else
         {
-            return Property::String;
+            return Config::String;
         }
     }
 
@@ -187,71 +193,152 @@ namespace cfg
         return propertyName;
     }
 
-    bool MatchesReserved( char const& i_character );
-    bool MatchesReserved( char const& i_character )
+    bool IsReserved( char const& i_character );
+    bool IsReserved( char const& i_character )
     {
         for ( std::size_t index ( 0 ); index < sizeof( k_reserved )/2; ++index )
         {
             if ( i_character == k_reserved[index][0] )
+            {
                 return true;
+            }
         }
         return false;
     }
 
-    std::vector< std::string > ParseConfiguration( std::string const& i_filename );
-    std::vector< std::string > ParseConfiguration( std::string const& i_filename )
+    bool IsReserved( std::string const& i_token );
+    bool IsReserved( std::string const& i_token )
     {
-        // Read the tokens first
+        for ( std::size_t index ( 0 ); index < sizeof( k_reserved )/2; ++index )
+        {
+            if ( i_token == k_reserved[index] )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    std::vector< std::string > TokenizeFile( std::string const& i_filename );
+    std::vector< std::string > TokenizeFile( std::string const& i_filename )
+    {
         std::ifstream configFile ( i_filename );
 
         char character;
         bool isString (false);
+        bool isEscaped (false);
         std::string currentToken;
         std::vector< std::string > tokens;
         while ( configFile.get( character ) )
         {
-            if ( character == k_reserved[ Quote ][0] )
-                isString = !isString;
-            else if ( MatchesReserved( character ) )
+            if ( isString )
             {
-                if ( !currentToken.empty() )
+                if ( isEscaped )
                 {
-                    tokens.push_back( currentToken );
-                    currentToken.clear();
+                    isEscaped = false;
+                    currentToken += character;
                 }
-                std::string reserved;
-                reserved += character;
-                tokens.push_back( reserved );
-            }
-            else if ( character == '\n' )
-            {
-                // Finish line
-                if ( !currentToken.empty() )
+                else
                 {
-                    tokens.push_back( currentToken );
-                    currentToken.clear();
+                    if ( character == k_reserved[ Escape ][0] )
+                    {
+                        isEscaped = true;
+                    }
+                    else if ( character == k_reserved[ Quote ][0] )
+                    {
+                        isString = false;
+                        currentToken += character;
+                        tokens.push_back( currentToken );
+                        currentToken.clear();
+
+                    }
+                    else
+                    {
+                        currentToken += character;
+                    }
                 }
             }
-            else if ( std::isblank( character ) )
+            else
             {
-                continue; // skip over blank characters other than newline
-            }
-            else //any other characters are not blank or reserved
-            {
-                currentToken += character;
+                if ( IsReserved( character ) )
+                {
+                    if ( character == k_reserved[ Quote ][0] )
+                    {
+                        isString = true;
+                        if ( !currentToken.empty() )
+                        {
+                            tokens.push_back( currentToken );
+                            currentToken.clear();
+                        }
+                        currentToken += character;
+                    }
+                    else
+                    {
+                        if ( !currentToken.empty() )
+                        {
+                            tokens.push_back( currentToken );
+                            currentToken.clear();
+                        }
+                        currentToken += character;
+                        tokens.push_back( currentToken );
+                        currentToken.clear();
+                    }
+                }
+                else if ( std::isblank( character ) )
+                {
+                    if ( !currentToken.empty() )
+                    {
+                        tokens.push_back( currentToken );
+                        currentToken.clear();
+                    }
+                }
+                else //any other characters are not blank or reserved
+                {
+                    currentToken += character;
+                }
             }
         }
-
-        for ( auto const& token : tokens )
+        // in case file ends on a regular character
+        if ( !currentToken.empty() )
         {
-            std::cout << token << " ";
+            tokens.push_back( currentToken );
         }
 
         return tokens;
     }
 
-    Property::Property( std::string const& i_filename )
-        : m_type ( Property::File )
+    void ReadSection( std::vector< std::string >::const_iterator & io_token );
+    void ReadSection( std::vector< std::string >::const_iterator & io_token )
+    {
+        ++io_token;
+        std::string sectionName ( *io_token );
+        ++io_token;
+        assert( *io_token == k_reserved[ SectionEnd ] );
+        ++io_token;
+        assert( *io_token == k_reserved[ Newline ] );
+        ++io_token;
+        if ( *io_token == k_reserved[ GroupStart ] )
+        {
+
+        }
+        //while ( *io_token != k_reserved[ SectionStart ] )
+
+
+    }
+
+    Group BuildSyntaxTree( std::vector< std::string > const& i_tokens );
+    /*
+     * Determine whether each line is an assignment or section/group declaration
+     * Add it to a tree structure holding this information
+     */
+    Group BuildSyntaxTree( std::vector< std::string > const& i_tokens )
+    {
+
+
+    }
+
+    Config::Config( std::string const& i_filename )
+        : m_type ( Config::File )
         , m_name ( i_filename )
         , m_string ()
         , m_int ()
@@ -259,7 +346,16 @@ namespace cfg
         , m_bool ()
         , m_section ()
     {
-        ParseConfiguration( i_filename );
+        // Break File into tokens
+        std::vector< std::string > tokens ( TokenizeFile( i_filename ) );
+//        for ( auto const& token : tokens )
+//        {
+//            std::cout << token << " ";
+//        }
+//        std::cout << std::endl;
+        // Syntactic Analysis
+        ConfigAST syntaxTree ( tokens );
+
         // Break file into tokens, separated by line
         std::vector< TokenList > lineTokens;
         {
@@ -283,7 +379,7 @@ namespace cfg
         }
 
         // Keep track of our depth when adding properties
-        std::vector<Property*> stack;
+        std::vector<Config*> stack;
         stack.push_back( this );
         bool withinScope ( true );
         // For each line, determine if each line is a property or section
@@ -297,7 +393,7 @@ namespace cfg
                 {
                     stack.pop_back();
                 }
-                stack.back()->m_section.push_back( Property( line.front().substr( 1, line.front().size()-2 ), std::vector<Property>() ) );
+                stack.back()->m_section.push_back( Config( line.front().substr( 1, line.front().size()-2 ), std::vector<Config>() ) );
                 stack.push_back( &( stack.back()->m_section.back() ) );
                 withinScope = false;
             }
@@ -312,22 +408,22 @@ namespace cfg
             }
             else if ( LineIsAssignment( line ) )
             {
-                Property::Type type ( AssignmentType( line ) );
-                if ( type == Property::Int )
+                Config::Type type ( AssignmentType( line ) );
+                if ( type == Config::Int )
                 {
-                    stack.back()->m_section.push_back( Property( PropertyName( line ), std::stoi( PropertyValue( line ) ) ) );
+                    stack.back()->m_section.push_back( Config( PropertyName( line ), std::stoi( PropertyValue( line ) ) ) );
                 }
-                else if ( type == Property::Float )
+                else if ( type == Config::Float )
                 {
-                    stack.back()->m_section.push_back( Property( PropertyName( line ), std::stof( PropertyValue( line ) ) ) );
+                    stack.back()->m_section.push_back( Config( PropertyName( line ), std::stof( PropertyValue( line ) ) ) );
                 }
-                else if ( type == Property::Bool )
+                else if ( type == Config::Bool )
                 {
-                    stack.back()->m_section.push_back( Property( PropertyName( line ), PropertyValue( line ) == "true" ) );
+                    stack.back()->m_section.push_back( Config( PropertyName( line ), PropertyValue( line ) == "true" ) );
                 }
                 else
                 {
-                    stack.back()->m_section.push_back( Property( PropertyName( line ), PropertyValue( line ) ) );
+                    stack.back()->m_section.push_back( Config( PropertyName( line ), PropertyValue( line ) ) );
                 }
             }
             else if ( line.front().substr( 0, 1 ) == k_reserved[ Comment ] )
@@ -337,8 +433,8 @@ namespace cfg
         }
     }
 
-    Property::Property( std::string const& i_name, std::string const& i_value )
-        : m_type ( Property::String )
+    Config::Config( std::string const& i_name, std::string const& i_value )
+        : m_type ( Config::String )
         , m_name ( i_name )
         , m_string ( i_value )
         , m_int ()
@@ -346,8 +442,8 @@ namespace cfg
         , m_bool ()
         , m_section (){}
 
-    Property::Property( std::string const& i_name, int const& i_value )
-        : m_type ( Property::Int )
+    Config::Config( std::string const& i_name, int const& i_value )
+        : m_type ( Config::Int )
         , m_name ( i_name )
         , m_string ()
         , m_int ( i_value )
@@ -355,8 +451,8 @@ namespace cfg
         , m_bool ()
         , m_section (){}
 
-    Property::Property( std::string const& i_name, float const& i_value )
-        : m_type ( Property::Float )
+    Config::Config( std::string const& i_name, float const& i_value )
+        : m_type ( Config::Float )
         , m_name ( i_name )
         , m_string ()
         , m_int ()
@@ -364,8 +460,8 @@ namespace cfg
         , m_bool ()
         , m_section (){}
 
-    Property::Property( std::string const& i_name, bool const& i_value )
-        : m_type ( Property::Bool )
+    Config::Config( std::string const& i_name, bool const& i_value )
+        : m_type ( Config::Bool )
         , m_name ( i_name )
         , m_string ()
         , m_int ()
@@ -373,8 +469,8 @@ namespace cfg
         , m_bool ( i_value)
         , m_section (){}
 
-    Property::Property( std::string const& i_name, std::vector<Property> const& i_value )
-        : m_type ( Property::Section )
+    Config::Config( std::string const& i_name, std::vector<Config> const& i_value )
+        : m_type ( Config::Section )
         , m_name ( i_name )
         , m_string ()
         , m_int ()
@@ -382,11 +478,11 @@ namespace cfg
         , m_bool ()
         , m_section ( i_value ){}
 
-    Property const& Property::GetProperty( std::string const& i_name ) const
+    Config const& Config::GetProperty( std::string const& i_name ) const
     {
         TokenList propertyName( SplitPropertyName( i_name ) );
 
-        Property const* currentProp ( this );
+        Config const* currentProp ( this );
         for ( auto const& name : propertyName )
         {
             for( auto const& property : currentProp->m_section )
@@ -401,72 +497,87 @@ namespace cfg
         return *currentProp;
     }
 
-    std::string const& Property::GetStringProperty( std::string const& i_name ) const
+    std::string const& Config::GetStringProperty( std::string const& i_name ) const
     {
         return GetProperty( i_name ).m_string;
     }
 
-    int const& Property::GetIntProperty( std::string const& i_name ) const
+    int const& Config::GetIntProperty( std::string const& i_name ) const
     {
         return GetProperty( i_name ).m_int;
     }
 
-    float const& Property::GetFloatProperty( std::string const& i_name ) const
+    float const& Config::GetFloatProperty( std::string const& i_name ) const
     {
         return GetProperty( i_name ).m_float;
     }
 
-    bool const& Property::GetBoolProperty( std::string const& i_name ) const
+    bool const& Config::GetBoolProperty( std::string const& i_name ) const
     {
         return GetProperty( i_name ).m_bool;
     }
 
-    std::vector<Property> const& Property::GetSection( std::string const& i_name ) const
+    std::vector<Config> const& Config::GetSection( std::string const& i_name ) const
     {
         return GetProperty( i_name ).m_section;
     }
 
-    Property & Property::SetStringProperty( std::string const& i_name, std::string const& i_value )
+    Config & Config::SetStringProperty( std::string const& i_name, std::string const& i_value )
     {
-        return *this;
+        if ( i_name == i_value )
+            return *this;
+        else
+            return *this;
     }
 
-    Property & Property::SetIntProperty( std::string const& i_name, int const& i_value )
+    Config & Config::SetIntProperty( std::string const& i_name, int const& i_value )
     {
-        return *this;
+        if ( int(i_name.size()) == i_value )
+            return *this;
+        else
+            return *this;
     }
 
-    Property & Property::SetFloatProperty( std::string const& i_name, float const& i_value )
+    Config & Config::SetFloatProperty( std::string const& i_name, float const& i_value )
     {
-        return *this;
+        if ( i_name.size() > i_value )
+            return *this;
+        else
+            return *this;
     }
 
-    Property & Property::SetBoolProperty( std::string const& i_name, bool const& i_value )
+    Config & Config::SetBoolProperty( std::string const& i_name, bool const& i_value )
     {
-        return *this;
+        if ( i_name.empty() == i_value )
+            return *this;
+        else
+            return *this;
     }
 
-    Property & Property::SetSection( std::string const& i_name )
+    Config & Config::SetSection( std::string const& i_name )
     {
-        return *this;
+        if ( i_name.empty() )
+            return *this;
+        else
+            return *this;
     }
 
-    void Property::Print( int const& i_indent ) const
+    void Config::Print( int const& i_indent ) const
     {
         std::cout << std::string( std::string::size_type( i_indent*4 ), ' ' ) << m_name;
-        if ( m_type == Property::Int )
+        if ( m_type == Config::Int )
         {
             std::cout << " = " << m_int;
         }
-        if ( m_type == Property::Float )
+        if ( m_type == Config::Float )
         {
             std::cout << " = " << m_float;
         }
-        if ( m_type == Property::Bool )
+        if ( m_type == Config::Bool )
         {
             std::cout << " = " << m_bool;
         }
-        if ( m_type == Property::String )
+        if ( m_type == Config::String )
         {
             std::cout << " = " << m_string;
         }

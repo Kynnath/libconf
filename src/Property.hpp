@@ -13,7 +13,7 @@
 
 namespace cfg
 {
-    class Property
+    class Config
     {
         public:
             enum Type
@@ -33,18 +33,18 @@ namespace cfg
             int m_int;
             float m_float;
             bool m_bool;
-            std::vector<Property> m_section;
+            std::vector<Config> m_section;
 
-            Property const& GetProperty( std::string const& i_name ) const;
+            Config const& GetProperty( std::string const& i_name ) const;
 
         public:
-            Property() = default;
-            Property( std::string const& i_filename );
-            Property( std::string const& i_name, std::string const& i_value );
-            Property( std::string const& i_name, int const& i_value );
-            Property( std::string const& i_name, float const& i_value );
-            Property( std::string const& i_name, bool const& i_value );
-            Property( std::string const& i_name, std::vector<Property> const& i_value );
+            Config() = default;
+            Config( std::string const& i_filename );
+            Config( std::string const& i_name, std::string const& i_value );
+            Config( std::string const& i_name, int const& i_value );
+            Config( std::string const& i_name, float const& i_value );
+            Config( std::string const& i_name, bool const& i_value );
+            Config( std::string const& i_name, std::vector<Config> const& i_value );
 
             void Print( int const& i_indent = 0 ) const;
 
@@ -52,13 +52,13 @@ namespace cfg
             int const& GetIntProperty( std::string const& i_name ) const;
             float const& GetFloatProperty( std::string const& i_name ) const;
             bool const& GetBoolProperty( std::string const& i_name ) const;
-            std::vector<Property> const& GetSection( std::string const& i_name ) const;
+            std::vector<Config> const& GetSection( std::string const& i_name ) const;
 
-            Property & SetStringProperty( std::string const& i_name, std::string const& i_value );
-            Property & SetIntProperty( std::string const& i_name, int const& i_value );
-            Property & SetFloatProperty( std::string const& i_name, float const& i_value );
-            Property & SetBoolProperty( std::string const& i_name, bool const& i_value );
-            Property & SetSection( std::string const& i_name );
+            Config & SetStringProperty( std::string const& i_name, std::string const& i_value );
+            Config & SetIntProperty( std::string const& i_name, int const& i_value );
+            Config & SetFloatProperty( std::string const& i_name, float const& i_value );
+            Config & SetBoolProperty( std::string const& i_name, bool const& i_value );
+            Config & SetSection( std::string const& i_name );
     };
 }
 #endif	/* PROPERTY_HPP */
