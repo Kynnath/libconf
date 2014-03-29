@@ -36,7 +36,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/ConfigParser.o \
-	${OBJECTDIR}/src/Property.o
+	${OBJECTDIR}/src/LEX/Lexer.o \
+	${OBJECTDIR}/src/LEX/Token.o \
+	${OBJECTDIR}/src/Property.o \
+	${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o
 
 
 # C Compiler Flags
@@ -68,12 +71,27 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a: ${OBJECTFILES}
 ${OBJECTDIR}/src/ConfigParser.o: src/ConfigParser.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ConfigParser.o src/ConfigParser.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ConfigParser.o src/ConfigParser.cpp
+
+${OBJECTDIR}/src/LEX/Lexer.o: src/LEX/Lexer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/LEX
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Lexer.o src/LEX/Lexer.cpp
+
+${OBJECTDIR}/src/LEX/Token.o: src/LEX/Token.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/LEX
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Token.o src/LEX/Token.cpp
 
 ${OBJECTDIR}/src/Property.o: src/Property.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Property.o src/Property.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Property.o src/Property.cpp
+
+${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o: src/Semantic/SemanticAnalyzer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Semantic
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o src/Semantic/SemanticAnalyzer.cpp
 
 # Subprojects
 .build-subprojects:

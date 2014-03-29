@@ -13,48 +13,6 @@
 
 namespace cfg
 {
-    struct property
-    {
-        enum Type
-        {
-            String,
-            Int,
-            Float,
-            Bool
-        };
-        Type m_type;
-
-    };
-
-    struct Int
-    : public property
-    {
-        int m_int;
-        std::string m_name;
-    };
-
-    struct Float
-    : public property
-    {
-        float m_float;
-        std::string m_name;
-    };
-
-    struct Bool
-    : public property
-    {
-        bool m_bool;
-        std::string m_name;
-    };
-
-    struct String
-    : public property
-    {
-        std::string m_string;
-        std::string m_name;
-    };
-
-
     class Config
     {
         public:
