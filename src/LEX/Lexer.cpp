@@ -8,6 +8,7 @@
 #include "Lexer.hpp"
 
 #include <fstream>
+#include <stdexcept>
 
 namespace cfg
 {
@@ -46,6 +47,8 @@ namespace cfg
         {}
 
         bool IsReserved( char const& i_character );
+        bool IsNumber( char const& i_character );
+        bool IsAlpha( char const& i_character );
 
         char const k_reserved[] =
         {
@@ -106,7 +109,22 @@ namespace cfg
             {
                 io_lexerData.m_currentState = ReservedCharacter;
             }
-
+            else if ( io_lexerData.m_character == '-' )
+            {
+                io_lexerData.m_currentState = NegativeNumber;
+            }
+            else if ( std::isdigit( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_currentState = Number;
+            }
+            else if ( std::isalpha( io_lexerData.m_character ) || io_lexerData.m_character == '_' )
+            {
+                io_lexerData.m_currentState = Name;
+            }
+            else
+            {
+                throw std::exception();
+            }
         }
 
         std::vector<Token> BuildTokenSequence( std::string i_configFile )

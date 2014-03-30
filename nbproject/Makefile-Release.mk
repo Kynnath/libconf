@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/ConfigParser.o \
 	${OBJECTDIR}/src/LEX/Lexer.o \
+	${OBJECTDIR}/src/LEX/LexerError.o \
 	${OBJECTDIR}/src/LEX/Token.o \
 	${OBJECTDIR}/src/Property.o \
 	${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o
@@ -77,6 +78,11 @@ ${OBJECTDIR}/src/LEX/Lexer.o: src/LEX/Lexer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/LEX
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Lexer.o src/LEX/Lexer.cpp
+
+${OBJECTDIR}/src/LEX/LexerError.o: src/LEX/LexerError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/LEX
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/LexerError.o src/LEX/LexerError.cpp
 
 ${OBJECTDIR}/src/LEX/Token.o: src/LEX/Token.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/LEX
