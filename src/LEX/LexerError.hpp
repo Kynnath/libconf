@@ -26,7 +26,12 @@ namespace cfg
                     MisformedNumber,
                     MissingQuote
                 };
-                LexerError( Type const& i_errorType );
+            private:
+                Type m_type;
+                int m_row;
+                int m_column;
+            public:
+                LexerError( Type const& i_errorType, int const& i_row, int const& i_column );
         };
     }
 }
