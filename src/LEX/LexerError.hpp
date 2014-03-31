@@ -21,7 +21,8 @@ namespace cfg
                 enum Type
                 {
                     IllegalFirstCharacter,
-                    MisformedNumber
+                    MisformedNumber,
+                    IllegalName
                 };
                 LexerError( Type const& i_errorType );
         };

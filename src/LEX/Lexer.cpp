@@ -66,6 +66,8 @@ namespace cfg
         };
 
         char const k_decimal = '.';
+        char const k_underscore = '_';
+        char const k_minus = '-';
 
         struct Reserved
         {
@@ -120,7 +122,7 @@ namespace cfg
             {
                 io_lexerData.m_currentState = ReservedCharacter;
             }
-            else if ( io_lexerData.m_character == '-' )
+            else if ( io_lexerData.m_character == k_minus )
             {
                 io_lexerData.m_currentState = NegativeNumber;
             }
@@ -128,7 +130,7 @@ namespace cfg
             {
                 io_lexerData.m_currentState = Number;
             }
-            else if ( std::isalpha( io_lexerData.m_character ) || io_lexerData.m_character == '_' )
+            else if ( std::isalpha( io_lexerData.m_character ) || io_lexerData.m_character == k_underscore )
             {
                 io_lexerData.m_currentState = Name;
             }
@@ -263,7 +265,55 @@ namespace cfg
             }
         }
 
+        void AddNameToken( int const& i_row, int const& i_column, std::string const& i_name, std::vector<Token> & io_tokens );
+        void AddNameToken( int const& i_row, int const& i_column, std::string const& i_name, std::vector<Token> & io_tokens )
+        {
+            io_tokens.push_back( Token( i_row, i_column, Token::Name, i_name ) );
+        }
 
+        void Name( LexerData & io_lexerData )
+        {
+            io_lexerData.m_characterSequence += io_lexerData.m_character;
+
+            if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_row += 1;
+
+                if ( std::isblank( io_lexerData.m_character ) )
+                {
+                    AddNameToken( io_lexerData.m_rowFirst,
+                                  io_lexerData.m_columnFirst,
+                                  io_lexerData.m_characterSequence,
+                                  io_lexerData.m_tokenSequence );
+
+                    io_lexerData.m_currentState = Initial;
+                }
+                else if ( IsReserved( io_lexerData.m_character ) )
+                {
+                    AddNameToken( io_lexerData.m_rowFirst,
+                                  io_lexerData.m_columnFirst,
+                                  io_lexerData.m_characterSequence,
+                                  io_lexerData.m_tokenSequence );
+
+                    io_lexerData.m_currentState = ReservedCharacter;
+                }
+                else if ( !std::isalpha( io_lexerData.m_character ) &&
+                          !io_lexerData.m_character == k_underscore &&
+                          !std::isdigit( io_lexerData.m_character ) )
+                {
+                    throw LexerError( LexerError::IllegalName );
+                }
+            }
+            else
+            {
+                AddNameToken( io_lexerData.m_rowFirst,
+                              io_lexerData.m_columnFirst,
+                              io_lexerData.m_characterSequence,
+                              io_lexerData.m_tokenSequence );
+
+                io_lexerData.m_currentState = nullptr;
+            }
+        }
 
         std::vector<Token> BuildTokenSequence( std::string i_configFile )
         {
