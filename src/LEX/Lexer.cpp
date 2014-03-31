@@ -49,10 +49,6 @@ namespace cfg
             , m_currentState ( Initial )
         {}
 
-        bool IsReserved( char const& i_character );
-        bool IsNumber( char const& i_character );
-        bool IsAlpha( char const& i_character );
-
         char const k_reserved[] =
         {
             ';',
@@ -68,6 +64,7 @@ namespace cfg
         char const k_decimal = '.';
         char const k_underscore = '_';
         char const k_minus = '-';
+        char const k_escape = '\\';
 
         struct Reserved
         {
@@ -84,6 +81,7 @@ namespace cfg
             };
         };
 
+        bool IsReserved( char const& i_character );
         bool IsReserved( char const& i_character )
         {
             for ( std::size_t index ( 0 ); index < sizeof( k_reserved ); ++index )
@@ -314,6 +312,86 @@ namespace cfg
                 io_lexerData.m_currentState = nullptr;
             }
         }
+
+        void AddStringToken( int const& i_row, int const& i_column, std::string const& i_string, std::vector<Token> & io_tokens );
+        void AddStringToken( int const& i_row, int const& i_column, std::string const& i_string, std::vector<Token> & io_tokens )
+        {
+            io_tokens.push_back( Token( i_row, i_column, Token::String, i_string ) );
+        }
+
+        void String( LexerData & io_lexerData )
+        {
+            // Should eventually be a utf8 aware function
+            if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_row += 1;
+
+                if ( io_lexerData.m_character == k_escape )
+                {
+                    io_lexerData.m_currentState = Escaped;
+                }
+                else if ( io_lexerData.m_character == k_reserved[ Reserved::Quote ] )
+                {
+                    AddStringToken( io_lexerData.m_rowFirst,
+                                    io_lexerData.m_columnFirst,
+                                    io_lexerData.m_characterSequence,
+                                    io_lexerData.m_tokenSequence );
+
+                    io_lexerData.m_currentState = Initial;
+                }
+                else
+                {
+                    if ( io_lexerData.m_character == k_reserved[ Reserved::LineDelimeter ] )
+                    {
+                        io_lexerData.m_row = 0;
+                        io_lexerData.m_column += 1;
+                    }
+
+                    io_lexerData.m_characterSequence += io_lexerData.m_character; // Needs to be a utf8 aware function later
+                }
+            }
+            else
+            {
+                throw LexerError( LexerError::MissingQuote );
+            }
+        }
+
+        void AddCommentToken( int const& i_row, int const& i_column, std::string const& i_comment, std::vector<Token> & io_tokens );
+        void AddCommentToken( int const& i_row, int const& i_column, std::string const& i_comment, std::vector<Token> & io_tokens )
+        {
+            io_tokens.push_back( Token( i_row, i_column, Token::Comment, i_comment ) );
+        }
+
+        void Comment( LexerData & io_lexerData )
+        {
+            // Should eventually be a utf8 aware function
+            if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_row += 1;
+
+                if ( io_lexerData.m_character == k_reserved[ Reserved::LineDelimeter ] )
+                {
+                    AddCommentToken( io_lexerData.m_rowFirst,
+                                     io_lexerData.m_columnFirst,
+                                     io_lexerData.m_characterSequence,
+                                     io_lexerData.m_tokenSequence );
+
+                    io_lexerData.m_row = 0;
+                    io_lexerData.m_column += 1;
+
+                    io_lexerData.m_currentState = Initial;
+                }
+                else
+                {
+                    io_lexerData.m_characterSequence += io_lexerData.m_character; // Needs to be a utf8 aware function later
+                }
+            }
+            else
+            {
+                io_lexerData.m_currentState = nullptr;
+            }
+        }
+
 
         std::vector<Token> BuildTokenSequence( std::string i_configFile )
         {

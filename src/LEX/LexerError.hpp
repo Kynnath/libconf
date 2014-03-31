@@ -22,7 +22,8 @@ namespace cfg
                 {
                     IllegalFirstCharacter,
                     MisformedNumber,
-                    IllegalName
+                    IllegalName,
+                    MissingQuote
                 };
                 LexerError( Type const& i_errorType );
         };
