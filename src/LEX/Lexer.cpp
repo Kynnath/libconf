@@ -37,6 +37,7 @@ namespace cfg
             int m_column, m_columnFirst;
             std::vector<Token> m_tokenSequence;
             char m_character;
+            std::string m_characterSequence;
             StateFunction m_currentState;
 
             LexerData( std::string const& i_configFile );
@@ -172,6 +173,29 @@ namespace cfg
                 }
 
                 io_lexerData.m_currentState = Initial;
+            }
+        }
+
+        void NegativeNumber( LexerData & io_lexerData )
+        {
+            io_lexerData.m_characterSequence += io_lexerData.m_character;
+
+            if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_row += 1;
+
+                if ( std::isdigit( io_lexerData.m_character ) )
+                {
+                    io_lexerData.m_currentState = Number;
+                }
+                else
+                {
+                    throw LexerError( LexerError::MisformedNumber );
+                }
+            }
+            else
+            {
+                throw LexerError( LexerError::MisformedNumber );
             }
         }
 
