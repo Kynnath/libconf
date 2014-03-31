@@ -64,16 +64,19 @@ namespace cfg
             '\n'
         };
 
-        enum class Reserved
+        struct Reserved
         {
-            Comment,
-            ScopeLeftDelimiter,
-            ScopeRightDelimiter,
-            ScopeTopDelimiter,
-            ScopeBottomDelimiter,
-            Assignment,
-            Quote,
-            LineDelimeter
+            enum
+            {
+                Comment = 0,
+                ScopeLeftDelimiter,
+                ScopeRightDelimiter,
+                ScopeTopDelimiter,
+                ScopeBottomDelimiter,
+                Assignment,
+                Quote,
+                LineDelimeter
+            };
         };
 
         bool IsReserved( char const& i_character )
