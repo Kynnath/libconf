@@ -446,6 +446,30 @@ namespace cfg
             }
         }
 
+        void Escaped( LexerData & io_lexerData )
+        {
+            if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_row += 1;
+
+                if ( io_lexerData.m_character == k_reserved[ Reserved::Quote ] ||
+                     io_lexerData.m_character == k_escape )
+                {
+                    io_lexerData.m_characterSequence += io_lexerData.m_character;
+
+                    io_lexerData.m_currentState = String;
+                }
+                else
+                {
+                    throw LexerError( LexerError::IllegalEscape );
+                }
+            }
+            else
+            {
+                throw LexerError( LexerError::IllegalEscape );
+            }
+        }
+
         std::vector<Token> BuildTokenSequence( std::string i_configFile )
         {
             LexerData data ( i_configFile );

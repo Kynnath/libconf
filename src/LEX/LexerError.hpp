@@ -20,9 +20,10 @@ namespace cfg
             public:
                 enum Type
                 {
+                    IllegalEscape,
                     IllegalFirstCharacter,
-                    MisformedNumber,
                     IllegalName,
+                    MisformedNumber,
                     MissingQuote
                 };
                 LexerError( Type const& i_errorType );
