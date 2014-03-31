@@ -11,10 +11,7 @@ namespace cfg
 {
     namespace lex
     {
-        Token::Token( std::string const& i_characterSequence )
-        {
-            // 
-        }
+
     }
 }
 

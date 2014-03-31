@@ -8,11 +8,22 @@
 #ifndef LEXERERROR_HPP
 #define	LEXERERROR_HPP
 
+#include <stdexcept>
+
 namespace cfg
 {
     namespace lex
     {
-
+        class LexerError
+            : public std::runtime_error
+        {
+            public:
+                enum Type
+                {
+                    IllegalFirstCharacter
+                };
+                LexerError( Type const& i_errorType );
+        };
     }
 }
 

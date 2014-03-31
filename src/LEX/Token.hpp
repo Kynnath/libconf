@@ -19,6 +19,7 @@ namespace cfg
             public:
                 enum Type
                 {
+                    Comment,
                     Integer,
                     Float,
                     Bool,
@@ -28,6 +29,7 @@ namespace cfg
                     ScopeRightDelimiter,
                     ScopeTopDelimiter,
                     ScopeBottomDelimiter,
+                    LineDelimeter,
                     Assignment
                 };
 
@@ -41,7 +43,11 @@ namespace cfg
                 std::string stringValue;
 
             public:
-                Token( std::string const& i_characterSequence );
+                Token( int const& i_row, int const& i_column, int const& i_value );
+                Token( int const& i_row, int const& i_column, float const& i_value );
+                Token( int const& i_row, int const& i_column, bool const& i_value );
+                Token( int const& i_row, int const& i_column, Type const& i_type );
+                Token( int const& i_row, int const& i_column, Type const& i_type, std::string const& i_value );
         };
     }
 }

@@ -8,7 +8,8 @@
 #include "Lexer.hpp"
 
 #include <fstream>
-#include <stdexcept>
+#include "LexerError.hpp"
+#include "Token.hpp"
 
 namespace cfg
 {
@@ -71,7 +72,7 @@ namespace cfg
             ScopeBottomDelimiter,
             Assignment,
             Quote,
-            NewLine
+            LineDelimeter
         };
 
         bool IsReserved( char const& i_character )
@@ -101,6 +102,9 @@ namespace cfg
 
         void FirstCharacter( LexerData & io_lexerData )
         {
+            io_lexerData.m_rowFirst = io_lexerData.m_row;
+            io_lexerData.m_columnFirst = io_lexerData.m_column;
+
             if ( std::isblank( io_lexerData.m_character ) )
             {
                 io_lexerData.m_currentState = Initial;
@@ -123,7 +127,51 @@ namespace cfg
             }
             else
             {
-                throw std::exception();
+                throw LexerError( LexerError::IllegalFirstCharacter );
+            }
+        }
+
+        void ReservedCharacter( LexerData & io_lexerData )
+        {
+            if ( io_lexerData.m_character == k_reserved[ Reserved::Assignment ] )
+            {
+                io_lexerData.m_currentState = String;
+            }
+            else if ( io_lexerData.m_character == k_reserved[ Reserved::Comment ] )
+            {
+                io_lexerData.m_currentState = Comment;
+            }
+            else
+            {
+                if ( io_lexerData.m_character == k_reserved[ Reserved::LineDelimeter ] )
+                {
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::LineDelimeter ) );
+
+                    io_lexerData.m_row = 0;
+                    io_lexerData.m_column += 1;
+                }
+                if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeLeftDelimiter ] )
+                {
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeLeftDelimiter ) );
+                }
+                else if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeRightDelimiter ] )
+                {
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeRightDelimiter ) );
+                }
+                else if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeTopDelimiter ] )
+                {
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeTopDelimiter ) );
+                }
+                else if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeBottomDelimiter ] )
+                {
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeBottomDelimiter ) );
+                }
+                else if ( io_lexerData.m_character == k_reserved[ Reserved::Assignment ] )
+                {
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::Assignment ) );
+                }
+
+                io_lexerData.m_currentState = Initial;
             }
         }
 
