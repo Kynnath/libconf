@@ -392,6 +392,59 @@ namespace cfg
             }
         }
 
+        void AddDecimalToken( int const& i_row, int const& i_column, std::string const& i_decimal, std::vector<Token> & io_tokens );
+        void AddDecimalToken( int const& i_row, int const& i_column, std::string const& i_decimal, std::vector<Token> & io_tokens )
+        {
+            std::stringstream numberStream ( i_decimal );
+            float decimal;
+            numberStream >> decimal;
+            io_tokens.push_back( Token( i_row, i_column, decimal ) );
+        }
+
+        void Decimal( LexerData & io_lexerData )
+        {
+            io_lexerData.m_characterSequence += io_lexerData.m_character;
+
+            if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
+            {
+                io_lexerData.m_row += 1;
+
+                if ( !std::isdigit( io_lexerData.m_character ) )
+                {
+                    if ( std::isblank( io_lexerData.m_character ) )
+                    {
+                        AddDecimalToken( io_lexerData.m_rowFirst,
+                                         io_lexerData.m_columnFirst,
+                                         io_lexerData.m_characterSequence,
+                                         io_lexerData.m_tokenSequence );
+
+                        io_lexerData.m_currentState = Initial;
+                    }
+                    else if ( IsReserved( io_lexerData.m_character ) )
+                    {
+                        AddDecimalToken( io_lexerData.m_rowFirst,
+                                         io_lexerData.m_columnFirst,
+                                         io_lexerData.m_characterSequence,
+                                         io_lexerData.m_tokenSequence );
+
+                        io_lexerData.m_currentState = ReservedCharacter;
+                    }
+                    else
+                    {
+                        throw LexerError( LexerError::MisformedNumber );
+                    }
+                }
+            }
+            else
+            {
+                AddDecimalToken( io_lexerData.m_rowFirst,
+                                 io_lexerData.m_columnFirst,
+                                 io_lexerData.m_characterSequence,
+                                 io_lexerData.m_tokenSequence );
+
+                io_lexerData.m_currentState = nullptr;
+            }
+        }
 
         std::vector<Token> BuildTokenSequence( std::string i_configFile )
         {
