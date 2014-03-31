@@ -230,19 +230,19 @@ namespace cfg
                     }
                     else if ( std::isblank( io_lexerData.m_character ) )
                     {
-                        void AddNumberToken( io_lexerData.m_rowFirst,
-                                             io_lexerData.m_columnFirst,
-                                             io_lexerData.m_characterSequence,
-                                             io_lexerData.m_tokenSequence );
+                        AddNumberToken( io_lexerData.m_rowFirst,
+                                        io_lexerData.m_columnFirst,
+                                        io_lexerData.m_characterSequence,
+                                        io_lexerData.m_tokenSequence );
 
                         io_lexerData.m_currentState = Initial;
                     }
                     else if ( IsReserved( io_lexerData.m_character ) )
                     {
-                        void AddNumberToken( io_lexerData.m_rowFirst,
-                                             io_lexerData.m_columnFirst,
-                                             io_lexerData.m_characterSequence,
-                                             io_lexerData.m_tokenSequence );
+                        AddNumberToken( io_lexerData.m_rowFirst,
+                                        io_lexerData.m_columnFirst,
+                                        io_lexerData.m_characterSequence,
+                                        io_lexerData.m_tokenSequence );
 
                         io_lexerData.m_currentState = ReservedCharacter;
                     }
@@ -254,14 +254,16 @@ namespace cfg
             }
             else
             {
-                void AddNumberToken( io_lexerData.m_rowFirst,
-                                     io_lexerData.m_columnFirst,
-                                     io_lexerData.m_characterSequence,
-                                     io_lexerData.m_tokenSequence );
+                AddNumberToken( io_lexerData.m_rowFirst,
+                                io_lexerData.m_columnFirst,
+                                io_lexerData.m_characterSequence,
+                                io_lexerData.m_tokenSequence );
 
                 io_lexerData.m_currentState = nullptr;
             }
         }
+
+
 
         std::vector<Token> BuildTokenSequence( std::string i_configFile )
         {
