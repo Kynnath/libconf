@@ -46,6 +46,8 @@ namespace cfg
 
         LexerData::LexerData( std::string const& i_configFile )
             : m_configFile ( i_configFile )
+            , m_row ( 1 ), m_rowFirst ( 1 )
+            , m_column ( 0 ), m_columnFirst ( 0 )
             , m_currentState ( Initial )
         {}
 
@@ -98,7 +100,7 @@ namespace cfg
         {
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
                 io_lexerData.m_currentState = FirstCharacter;
             }
             else
@@ -134,13 +136,13 @@ namespace cfg
             }
             else
             {
-                throw LexerError( LexerError::IllegalFirstCharacter );
+                throw LexerError( LexerError::IllegalFirstCharacter, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
         void ReservedCharacter( LexerData & io_lexerData )
         {
-            if ( io_lexerData.m_character == k_reserved[ Reserved::Assignment ] )
+            if ( io_lexerData.m_character == k_reserved[ Reserved::Quote ] )
             {
                 io_lexerData.m_currentState = String;
             }
@@ -154,8 +156,8 @@ namespace cfg
                 {
                     io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::LineDelimeter ) );
 
-                    io_lexerData.m_row = 0;
-                    io_lexerData.m_column += 1;
+                    io_lexerData.m_column = 0;
+                    io_lexerData.m_row += 1;
                 }
                 if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeLeftDelimiter ] )
                 {
@@ -188,7 +190,7 @@ namespace cfg
 
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
 
                 if ( std::isdigit( io_lexerData.m_character ) )
                 {
@@ -196,12 +198,12 @@ namespace cfg
                 }
                 else
                 {
-                    throw LexerError( LexerError::MisformedNumber );
+                    throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
                 }
             }
             else
             {
-                throw LexerError( LexerError::MisformedNumber );
+                throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
@@ -220,7 +222,7 @@ namespace cfg
 
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
 
                 if ( !std::isdigit( io_lexerData.m_character ) )
                 {
@@ -244,11 +246,11 @@ namespace cfg
                                         io_lexerData.m_characterSequence,
                                         io_lexerData.m_tokenSequence );
 
-                        io_lexerData.m_currentState = ReservedCharacter;
+                        io_lexerData.m_currentState = FirstCharacter;
                     }
                     else
                     {
-                        throw LexerError( LexerError::MisformedNumber );
+                        throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
                     }
                 }
             }
@@ -275,7 +277,7 @@ namespace cfg
 
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
 
                 if ( std::isblank( io_lexerData.m_character ) )
                 {
@@ -293,13 +295,13 @@ namespace cfg
                                   io_lexerData.m_characterSequence,
                                   io_lexerData.m_tokenSequence );
 
-                    io_lexerData.m_currentState = ReservedCharacter;
+                    io_lexerData.m_currentState = FirstCharacter;
                 }
                 else if ( !std::isalpha( io_lexerData.m_character ) &&
                           !io_lexerData.m_character == k_underscore &&
                           !std::isdigit( io_lexerData.m_character ) )
                 {
-                    throw LexerError( LexerError::IllegalName );
+                    throw LexerError( LexerError::IllegalName, io_lexerData.m_row, io_lexerData.m_column );
                 }
             }
             else
@@ -324,7 +326,7 @@ namespace cfg
             // Should eventually be a utf8 aware function
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
 
                 if ( io_lexerData.m_character == k_escape )
                 {
@@ -343,8 +345,8 @@ namespace cfg
                 {
                     if ( io_lexerData.m_character == k_reserved[ Reserved::LineDelimeter ] )
                     {
-                        io_lexerData.m_row = 0;
-                        io_lexerData.m_column += 1;
+                        io_lexerData.m_column = 0;
+                        io_lexerData.m_row += 1;
                     }
 
                     io_lexerData.m_characterSequence += io_lexerData.m_character; // Needs to be a utf8 aware function later
@@ -352,7 +354,7 @@ namespace cfg
             }
             else
             {
-                throw LexerError( LexerError::MissingQuote );
+                throw LexerError( LexerError::MissingQuote, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
@@ -376,8 +378,8 @@ namespace cfg
                                      io_lexerData.m_characterSequence,
                                      io_lexerData.m_tokenSequence );
 
-                    io_lexerData.m_row = 0;
-                    io_lexerData.m_column += 1;
+                    io_lexerData.m_column = 0;
+                    io_lexerData.m_row += 1;
 
                     io_lexerData.m_currentState = Initial;
                 }
@@ -407,7 +409,7 @@ namespace cfg
 
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
 
                 if ( !std::isdigit( io_lexerData.m_character ) )
                 {
@@ -427,11 +429,11 @@ namespace cfg
                                          io_lexerData.m_characterSequence,
                                          io_lexerData.m_tokenSequence );
 
-                        io_lexerData.m_currentState = ReservedCharacter;
+                        io_lexerData.m_currentState = FirstCharacter;
                     }
                     else
                     {
-                        throw LexerError( LexerError::MisformedNumber );
+                        throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
                     }
                 }
             }
@@ -450,7 +452,7 @@ namespace cfg
         {
             if ( io_lexerData.m_configFile.get( io_lexerData.m_character ) )
             {
-                io_lexerData.m_row += 1;
+                io_lexerData.m_column += 1;
 
                 if ( io_lexerData.m_character == k_reserved[ Reserved::Quote ] ||
                      io_lexerData.m_character == k_escape )
@@ -461,12 +463,12 @@ namespace cfg
                 }
                 else
                 {
-                    throw LexerError( LexerError::IllegalEscape );
+                    throw LexerError( LexerError::IllegalEscape, io_lexerData.m_row, io_lexerData.m_column );
                 }
             }
             else
             {
-                throw LexerError( LexerError::IllegalEscape );
+                throw LexerError( LexerError::IllegalEscape, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 

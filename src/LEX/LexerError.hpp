@@ -32,6 +32,8 @@ namespace cfg
                 int m_column;
             public:
                 LexerError( Type const& i_errorType, int const& i_row, int const& i_column );
+                int const& GetRow() const;
+                int const& GetColumn() const;
         };
     }
 }

@@ -26,5 +26,14 @@ namespace cfg
             , m_row ( i_row )
             , m_column ( i_column )
         {}
+
+        int const& LexerError::GetRow() const
+        {
+            return m_row;
+        }
+        int const& LexerError::GetColumn() const
+        {
+            return m_column;
+        }
     }
 }

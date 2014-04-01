@@ -40,7 +40,7 @@ namespace cfg
                 int m_integerValue;
                 float m_floatValue;
                 bool m_boolValue;
-                std::string stringValue;
+                std::string m_stringValue;
 
             public:
                 Token( int const& i_row, int const& i_column, int const& i_value );
@@ -48,6 +48,8 @@ namespace cfg
                 Token( int const& i_row, int const& i_column, bool const& i_value );
                 Token( int const& i_row, int const& i_column, Type const& i_type );
                 Token( int const& i_row, int const& i_column, Type const& i_type, std::string const& i_value );
+
+                void Print() const;
         };
     }
 }
