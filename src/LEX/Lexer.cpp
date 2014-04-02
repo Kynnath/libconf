@@ -68,6 +68,12 @@ namespace cfg
         char const k_minus = '-';
         char const k_escape = '\\';
 
+        char const k_keyword[][6] =
+        {
+            "true",
+            "false"
+        };
+
         struct Reserved
         {
             enum
@@ -80,6 +86,15 @@ namespace cfg
                 Assignment,
                 Quote,
                 LineDelimeter
+            };
+        };
+
+        struct Keyword
+        {
+            enum
+            {
+                True,
+                False
             };
         };
 
@@ -268,7 +283,20 @@ namespace cfg
         void AddNameToken( int const& i_row, int const& i_column, std::string const& i_name, std::vector<Token> & io_tokens );
         void AddNameToken( int const& i_row, int const& i_column, std::string const& i_name, std::vector<Token> & io_tokens )
         {
-            io_tokens.push_back( Token( i_row, i_column, Token::Name, i_name ) );
+            // Check if we are storing a reserved word
+            // Reserved words: true, false
+            if ( i_name == k_keyword[ Keyword::True ] )
+            {
+                io_tokens.push_back( Token( i_row, i_column, true ) );
+            }
+            else if ( i_name == k_keyword[ Keyword::False ] )
+            {
+                io_tokens.push_back( Token( i_row, i_column, false ) );
+            }
+            else
+            {
+                io_tokens.push_back( Token( i_row, i_column, Token::Name, i_name ) );
+            }
         }
 
         void Name( LexerData & io_lexerData )
