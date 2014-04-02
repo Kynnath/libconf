@@ -40,7 +40,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/LEX/LexerError.o \
 	${OBJECTDIR}/src/LEX/Token.o \
 	${OBJECTDIR}/src/Property.o \
-	${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o
+	${OBJECTDIR}/src/SYN/Expression.o \
+	${OBJECTDIR}/src/SYN/Parser.o \
+	${OBJECTDIR}/src/SYN/Property.o \
+	${OBJECTDIR}/src/SYN/Scope.o
 
 
 # C Compiler Flags
@@ -94,10 +97,25 @@ ${OBJECTDIR}/src/Property.o: src/Property.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Property.o src/Property.cpp
 
-${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o: src/Semantic/SemanticAnalyzer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/Semantic
+${OBJECTDIR}/src/SYN/Expression.o: src/SYN/Expression.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Semantic/SemanticAnalyzer.o src/Semantic/SemanticAnalyzer.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Expression.o src/SYN/Expression.cpp
+
+${OBJECTDIR}/src/SYN/Parser.o: src/SYN/Parser.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/SYN
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Parser.o src/SYN/Parser.cpp
+
+${OBJECTDIR}/src/SYN/Property.o: src/SYN/Property.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/SYN
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Property.o src/SYN/Property.cpp
+
+${OBJECTDIR}/src/SYN/Scope.o: src/SYN/Scope.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/SYN
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Scope.o src/SYN/Scope.cpp
 
 # Subprojects
 .build-subprojects:

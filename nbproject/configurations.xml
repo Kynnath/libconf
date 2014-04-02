@@ -5,10 +5,13 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>src/ConfigParser.hpp</itemPath>
+      <itemPath>src/SYN/Expression.hpp</itemPath>
       <itemPath>src/LEX/Lexer.hpp</itemPath>
       <itemPath>src/LEX/LexerError.hpp</itemPath>
+      <itemPath>src/SYN/Parser.hpp</itemPath>
       <itemPath>src/Property.hpp</itemPath>
-      <itemPath>src/Semantic/SemanticAnalyzer.hpp</itemPath>
+      <itemPath>src/SYN/Property.hpp</itemPath>
+      <itemPath>src/SYN/Scope.hpp</itemPath>
       <itemPath>src/LEX/Token.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -19,10 +22,13 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/ConfigParser.cpp</itemPath>
+      <itemPath>src/SYN/Expression.cpp</itemPath>
       <itemPath>src/LEX/Lexer.cpp</itemPath>
       <itemPath>src/LEX/LexerError.cpp</itemPath>
+      <itemPath>src/SYN/Parser.cpp</itemPath>
       <itemPath>src/Property.cpp</itemPath>
-      <itemPath>src/Semantic/SemanticAnalyzer.cpp</itemPath>
+      <itemPath>src/SYN/Property.cpp</itemPath>
+      <itemPath>src/SYN/Scope.cpp</itemPath>
       <itemPath>src/LEX/Token.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -77,9 +83,21 @@
       </item>
       <item path="src/Property.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Semantic/SemanticAnalyzer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/SYN/Expression.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/Semantic/SemanticAnalyzer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="src/SYN/Expression.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/Parser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/Parser.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/Property.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/Property.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/Scope.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/Scope.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="3">
@@ -124,9 +142,21 @@
       </item>
       <item path="src/Property.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Semantic/SemanticAnalyzer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/SYN/Expression.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/Semantic/SemanticAnalyzer.hpp" ex="false" tool="3" flavor2="0">
+      <item path="src/SYN/Expression.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/Parser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/Parser.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/Property.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/Property.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/Scope.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/Scope.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
