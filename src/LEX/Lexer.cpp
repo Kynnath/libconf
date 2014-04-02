@@ -126,6 +126,7 @@ namespace cfg
 
         void FirstCharacter( LexerData & io_lexerData )
         {
+            io_lexerData.m_characterSequence.clear();
             io_lexerData.m_rowFirst = io_lexerData.m_row;
             io_lexerData.m_columnFirst = io_lexerData.m_column;
 
