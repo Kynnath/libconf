@@ -8,11 +8,17 @@
 #ifndef PROPERTY_HPP
 #define	PROPERTY_HPP
 
+#include <string>
+
 namespace cfg
 {
     namespace syn
     {
+        class Property
+        {
+            std::string m_name;
 
+        };
     }
 }
 
