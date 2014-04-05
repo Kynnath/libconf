@@ -11,6 +11,9 @@ namespace cfg
 {
     namespace syn
     {
-
+        Property::Property( std::string const& i_name, Value const& i_value )
+        : m_name ( i_name )
+        , m_value ( i_value )
+        {}
     }
 }

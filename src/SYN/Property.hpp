@@ -9,6 +9,7 @@
 #define	PROPERTY_HPP
 
 #include <string>
+#include "Value.hpp"
 
 namespace cfg
 {
@@ -17,7 +18,10 @@ namespace cfg
         class Property
         {
             std::string m_name;
+            Value m_value;
 
+            public:
+                Property( std::string const& i_name, Value const& i_value );
         };
     }
 }
