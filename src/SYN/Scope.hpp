@@ -8,11 +8,19 @@
 #ifndef SCOPE_HPP
 #define	SCOPE_HPP
 
+#include <string>
+
 namespace cfg
 {
     namespace syn
     {
+        class Scope
+        {
+            std::string m_name;
 
+            public:
+                Scope( std::string const& i_name );
+        };
     }
 }
 

@@ -11,6 +11,8 @@ namespace cfg
 {
     namespace syn
     {
-
+        Scope::Scope( std::string const& i_name )
+        : m_name ( i_name )
+        {}
     }
 }
