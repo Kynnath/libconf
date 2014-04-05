@@ -19,10 +19,10 @@ namespace cfg
             public:
                 enum Type
                 {
-                    Bool,
-                    Int,
-                    Float,
-                    String
+                    e_Bool,
+                    e_Int,
+                    e_Float,
+                    e_String
                 };
 
             private:
