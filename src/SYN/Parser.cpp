@@ -7,6 +7,7 @@
 
 #include "Parser.hpp"
 
+#include <cassert>
 #include "Expression.hpp"
 #include "SyntaxError.hpp"
 #include "LEX/Token.hpp"
@@ -19,7 +20,6 @@ namespace cfg
         typedef void(*StateFunction)( ParserData& );
 
         void ExpressionList( ParserData & io_data );
-        void FirstToken( ParserData & io_data );
         void ReadProperty( ParserData & io_data );
         void PushScope( ParserData & io_data );
         void PopScope( ParserData & io_data );
@@ -41,44 +41,107 @@ namespace cfg
             , m_endToken ( i_tokenSequence.end() )
         {}
 
-        void ExpressionListState( ParserData & io_data )
+        void ExpressionList( ParserData & io_data )
         {
             if ( io_data.m_currentToken == io_data.m_endToken )
             {
                 io_data.m_state = nullptr;
             }
-            else if ( io_data.m_currentToken->GetType() == lex::Token::Name )
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_Name )
             {
                 io_data.m_state = ReadProperty;
             }
-            else if ( io_data.m_currentToken->GetType() == lex::Token::ScopeLeftDelimiter )
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeLeftDelimiter )
             {
                 io_data.m_state = PushScope;
             }
-            else if ( io_data.m_currentToken->GetType() == lex::Token::LineDelimiter )
-            {
-                ++io_data.m_currentToken;
-            }
-            else if ( io_data.m_currentToken->GetType() == lex::Token::ScopeBottomDelimiter )
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeBottomDelimiter )
             {
                 io_data.m_state = PopScope;
             }
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter ||
+                      io_data.m_currentToken->GetType() == lex::Token::e_Comment )
+            {
+                ++io_data.m_currentToken;
+            }
             else
             {
-                throw SyntaxError();
+                throw SyntaxError(); // Bad Expression
             }
         }
 
-        void FirstTokenState( ParserData & io_data )
+        Value GetValue( lex::Token const& i_token )
+        {
+            assert( i_token.GetType() == lex::Token::e_Bool ||
+                    i_token.GetType() == lex::Token::e_Integer ||
+                    i_token.GetType() == lex::Token::e_Float ||
+                    i_token.GetType() == lex::Token::e_String );
+
+            if ( i_token.GetType() == lex::Token::e_Bool )
+            {
+                return Value( i_token.GetBool() );
+            }
+            else if ( i_token.GetType() == lex::Token::e_Integer )
+            {
+                return Value( i_token.GetInt() );
+            }
+            else if ( i_token.GetType() == lex::Token::e_Float )
+            {
+                return Value( i_token.GetFloat() );
+            }
+            else
+            {
+                return Value( i_token.GetString() );
+            }
+        }
+
+        void ReadProperty( ParserData & io_data )
+        {
+            std::string const& name ( io_data.m_currentToken->GetString() );
+
+            ++io_data.m_currentToken;
+            if ( io_data.m_currentToken != io_data.m_endToken &&
+                 io_data.m_currentToken->GetType() == lex::Token::e_Assignment )
+            {
+                ++io_data.m_currentToken;
+                if ( io_data.m_currentToken != io_data.m_endToken &&
+                     ( io_data.m_currentToken->GetType() == lex::Token::e_Bool ||
+                       io_data.m_currentToken->GetType() == lex::Token::e_Integer ||
+                       io_data.m_currentToken->GetType() == lex::Token::e_Float ||
+                       io_data.m_currentToken->GetType() == lex::Token::e_String ) )
+                {
+                    Value value ( GetValue( *io_data.m_currentToken ) );
+                    ++io_data.m_currentToken;
+                    if ( io_data.m_currentToken != io_data.m_endToken &&
+                         io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
+                    {
+                        io_data.m_expressionTree.push_back( Expression( Property( name, value ) ) );
+                        io_data.m_state = ExpressionList;
+                        ++io_data.m_currentToken;
+                    }
+                    else
+                    {
+                        throw SyntaxError(); // Expected end of line
+                    }
+                }
+                else
+                {
+                    throw SyntaxError(); // Expected value
+                }
+            }
+            else
+            {
+                throw SyntaxError(); // Expected assignment
+            }
+        }
+
+        void PushScope( ParserData & io_data )
         {}
 
-        void PropertyState( ParserData & io_data )
+        void PopScope( ParserData & io_data )
         {}
 
-        void ScopeState( ParserData & io_data )
-        {}
-
-        void PropertyListState( ParserData & io_data )
+        void PropertyList( ParserData & io_data )
         {}
 
         std::vector< Expression > BuildSyntaxTree( std::vector<lex::Token> const& i_tokenSequence )

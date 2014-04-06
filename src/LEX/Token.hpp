@@ -19,18 +19,18 @@ namespace cfg
             public:
                 enum Type
                 {
-                    Comment,
-                    Integer,
-                    Float,
-                    Bool,
-                    String,
-                    Name,
-                    ScopeLeftDelimiter,
-                    ScopeRightDelimiter,
-                    ScopeTopDelimiter,
-                    ScopeBottomDelimiter,
-                    LineDelimiter,
-                    Assignment
+                    e_Comment,
+                    e_Integer,
+                    e_Float,
+                    e_Bool,
+                    e_String,
+                    e_Name,
+                    e_ScopeLeftDelimiter,
+                    e_ScopeRightDelimiter,
+                    e_ScopeTopDelimiter,
+                    e_ScopeBottomDelimiter,
+                    e_LineDelimiter,
+                    e_Assignment
                 };
 
             private:
@@ -50,6 +50,10 @@ namespace cfg
                 Token( int const& i_row, int const& i_column, Type const& i_type, std::string const& i_value );
 
                 Type const& GetType() const;
+                bool const& GetBool() const;
+                int const& GetInt() const;
+                float const& GetFloat() const;
+                std::string const& GetString() const;
 
                 void Print() const;
         };

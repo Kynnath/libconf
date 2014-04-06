@@ -170,30 +170,30 @@ namespace cfg
             {
                 if ( io_lexerData.m_character == k_reserved[ Reserved::LineDelimeter ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::LineDelimiter ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::e_LineDelimiter ) );
 
                     io_lexerData.m_column = 0;
                     io_lexerData.m_row += 1;
                 }
                 if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeLeftDelimiter ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeLeftDelimiter ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::e_ScopeLeftDelimiter ) );
                 }
                 else if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeRightDelimiter ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeRightDelimiter ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::e_ScopeRightDelimiter ) );
                 }
                 else if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeTopDelimiter ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeTopDelimiter ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::e_ScopeTopDelimiter ) );
                 }
                 else if ( io_lexerData.m_character == k_reserved[ Reserved::ScopeBottomDelimiter ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::ScopeBottomDelimiter ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::e_ScopeBottomDelimiter ) );
                 }
                 else if ( io_lexerData.m_character == k_reserved[ Reserved::Assignment ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::Assignment ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::e_Assignment ) );
                 }
 
                 io_lexerData.m_currentState = Initial;
@@ -296,7 +296,7 @@ namespace cfg
             }
             else
             {
-                io_tokens.push_back( Token( i_row, i_column, Token::Name, i_name ) );
+                io_tokens.push_back( Token( i_row, i_column, Token::e_Name, i_name ) );
             }
         }
 
@@ -347,7 +347,7 @@ namespace cfg
         void AddStringToken( int const& i_row, int const& i_column, std::string const& i_string, std::vector<Token> & io_tokens );
         void AddStringToken( int const& i_row, int const& i_column, std::string const& i_string, std::vector<Token> & io_tokens )
         {
-            io_tokens.push_back( Token( i_row, i_column, Token::String, i_string ) );
+            io_tokens.push_back( Token( i_row, i_column, Token::e_String, i_string ) );
         }
 
         void String( LexerData & io_lexerData )
@@ -390,7 +390,7 @@ namespace cfg
         void AddCommentToken( int const& i_row, int const& i_column, std::string const& i_comment, std::vector<Token> & io_tokens );
         void AddCommentToken( int const& i_row, int const& i_column, std::string const& i_comment, std::vector<Token> & io_tokens )
         {
-            io_tokens.push_back( Token( i_row, i_column, Token::Comment, i_comment ) );
+            io_tokens.push_back( Token( i_row, i_column, Token::e_Comment, i_comment ) );
         }
 
         void Comment( LexerData & io_lexerData )
