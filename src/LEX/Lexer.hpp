@@ -16,7 +16,7 @@ namespace cfg
     namespace lex
     {
 
-        std::vector<Token> BuildTokenSequence( std::string i_configFile );
+        std::vector<Token> BuildTokenSequence( std::string const& i_configFile );
 
 
     }

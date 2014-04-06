@@ -501,7 +501,7 @@ namespace cfg
             }
         }
 
-        std::vector<Token> BuildTokenSequence( std::string i_configFile )
+        std::vector<Token> BuildTokenSequence( std::string const& i_configFile )
         {
             LexerData data ( i_configFile );
 

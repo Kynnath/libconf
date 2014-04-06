@@ -7,6 +7,8 @@
 
 #include "Scope.hpp"
 
+#include "Expression.hpp"
+
 namespace cfg
 {
     namespace syn

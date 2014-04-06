@@ -15,7 +15,6 @@ namespace cfg
 {
     namespace syn
     {
-
         class Expression
         {
             public:

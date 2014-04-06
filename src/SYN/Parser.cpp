@@ -7,10 +7,16 @@
 
 #include "Parser.hpp"
 
+#include "Expression.hpp"
+
 namespace cfg
 {
     namespace syn
     {
-
+        std::vector< std::unique_ptr< Expression > > BuildSyntaxTree( std::vector<lex::Token> const& i_tokenSequence )
+        {
+            std::vector< std::unique_ptr< Expression > > test;
+            return test;
+        }
     }
 }

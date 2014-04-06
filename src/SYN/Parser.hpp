@@ -8,6 +8,7 @@
 #ifndef PARSER_HPP
 #define	PARSER_HPP
 
+#include <memory>
 #include <vector>
 
 namespace cfg
@@ -18,7 +19,8 @@ namespace cfg
     }
     namespace syn
     {
-        
+        class Expression;
+        std::vector< std::unique_ptr< Expression > > BuildSyntaxTree( std::vector<lex::Token> const& i_tokenSequence );
     }
 }
 
