@@ -44,6 +44,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/SYN/Parser.o \
 	${OBJECTDIR}/src/SYN/Property.o \
 	${OBJECTDIR}/src/SYN/Scope.o \
+	${OBJECTDIR}/src/SYN/SyntaxError.o \
 	${OBJECTDIR}/src/SYN/Value.o
 
 
@@ -117,6 +118,11 @@ ${OBJECTDIR}/src/SYN/Scope.o: src/SYN/Scope.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/SYN
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Scope.o src/SYN/Scope.cpp
+
+${OBJECTDIR}/src/SYN/SyntaxError.o: src/SYN/SyntaxError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/SYN
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/SyntaxError.o src/SYN/SyntaxError.cpp
 
 ${OBJECTDIR}/src/SYN/Value.o: src/SYN/Value.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/SYN

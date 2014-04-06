@@ -44,7 +44,7 @@ namespace cfg
                     m_type == ScopeRightDelimiter ||
                     m_type == ScopeTopDelimiter ||
                     m_type == ScopeBottomDelimiter ||
-                    m_type == LineDelimeter ||
+                    m_type == LineDelimiter ||
                     m_type == Assignment );
         }
 
@@ -71,9 +71,15 @@ namespace cfg
             "ScopeRightDelimiter",
             "ScopeTopDelimiter",
             "ScopeBottomDelimiter",
-            "LineDelimeter",
+            "LineDelimiter",
             "Assignment"
         };
+
+        Token::Type const& Token::GetType() const
+        {
+            return m_type;
+        }
+
         void Token::Print() const
         {
             std::cout << m_row << ":" << m_column << " " << k_tokenType[ m_type ] << std::endl;

@@ -170,7 +170,7 @@ namespace cfg
             {
                 if ( io_lexerData.m_character == k_reserved[ Reserved::LineDelimeter ] )
                 {
-                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::LineDelimeter ) );
+                    io_lexerData.m_tokenSequence.push_back( Token( io_lexerData.m_rowFirst, io_lexerData.m_columnFirst, Token::LineDelimiter ) );
 
                     io_lexerData.m_column = 0;
                     io_lexerData.m_row += 1;

@@ -20,7 +20,7 @@ namespace cfg
     namespace syn
     {
         class Expression;
-        std::vector< std::unique_ptr< Expression > > BuildSyntaxTree( std::vector<lex::Token> const& i_tokenSequence );
+        std::vector< Expression > BuildSyntaxTree( std::vector<lex::Token> const& i_tokenSequence );
     }
 }
 

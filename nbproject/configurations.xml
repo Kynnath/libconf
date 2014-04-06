@@ -14,7 +14,7 @@
         <itemPath>src/SYN/Parser.hpp</itemPath>
         <itemPath>src/SYN/Property.hpp</itemPath>
         <itemPath>src/SYN/Scope.hpp</itemPath>
-        <itemPath>src/SYN/Value.cpp</itemPath>
+        <itemPath>src/SYN/SyntaxError.hpp</itemPath>
         <itemPath>src/SYN/Value.hpp</itemPath>
       </logicalFolder>
       <itemPath>src/ConfigParser.hpp</itemPath>
@@ -35,7 +35,9 @@
       <itemPath>src/Property.cpp</itemPath>
       <itemPath>src/SYN/Property.cpp</itemPath>
       <itemPath>src/SYN/Scope.cpp</itemPath>
+      <itemPath>src/SYN/SyntaxError.cpp</itemPath>
       <itemPath>src/LEX/Token.cpp</itemPath>
+      <itemPath>src/SYN/Value.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -105,6 +107,10 @@
       </item>
       <item path="src/SYN/Scope.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/SYN/SyntaxError.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/SyntaxError.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/SYN/Value.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/SYN/Value.hpp" ex="false" tool="3" flavor2="0">
@@ -167,6 +173,10 @@
       <item path="src/SYN/Scope.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/SYN/Scope.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/SYN/SyntaxError.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/SYN/SyntaxError.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/SYN/Value.cpp" ex="false" tool="1" flavor2="0">
       </item>

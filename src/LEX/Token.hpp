@@ -29,7 +29,7 @@ namespace cfg
                     ScopeRightDelimiter,
                     ScopeTopDelimiter,
                     ScopeBottomDelimiter,
-                    LineDelimeter,
+                    LineDelimiter,
                     Assignment
                 };
 
@@ -48,6 +48,8 @@ namespace cfg
                 Token( int const& i_row, int const& i_column, bool const& i_value );
                 Token( int const& i_row, int const& i_column, Type const& i_type );
                 Token( int const& i_row, int const& i_column, Type const& i_type, std::string const& i_value );
+
+                Type const& GetType() const;
 
                 void Print() const;
         };
