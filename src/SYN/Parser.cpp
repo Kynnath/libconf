@@ -31,6 +31,7 @@ namespace cfg
             StateFunction m_state;
             std::vector<lex::Token>::const_iterator m_currentToken;
             std::vector<lex::Token>::const_iterator const m_endToken;
+            std::vector<std::string> m_currentScope;
 
             ParserData( std::vector<lex::Token> const& i_tokenSequence );
         };
@@ -136,7 +137,74 @@ namespace cfg
         }
 
         void PushScope( ParserData & io_data )
-        {}
+        {
+            ++io_data.m_currentToken;
+            if ( io_data.m_currentToken != io_data.m_endToken &&
+                 io_data.m_currentToken->GetType() == lex::Token::e_Name )
+            {
+                std::string const& name ( io_data.m_currentToken->GetString() );
+
+                ++io_data.m_currentToken;
+                if ( io_data.m_currentToken != io_data.m_endToken &&
+                     io_data.m_currentToken->GetType() == lex::Token::e_ScopeRightDelimiter )
+                {
+                    ++io_data.m_currentToken;
+                    if ( io_data.m_currentToken != io_data.m_endToken &&
+                         io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
+                    {
+                        ++io_data.m_currentToken;
+                        if ( io_data.m_currentToken != io_data.m_endToken )
+                        {
+                            if ( io_data.m_currentToken->GetType() == lex::Token::e_Name )
+                            {
+                                io_data.m_currentScope.push_back( name );
+                                io_data.m_state = PropertyList;
+                            }
+                            else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeTopDelimiter )
+                            {
+                                ++io_data.m_currentToken;
+                                if ( io_data.m_currentToken != io_data.m_endToken &&
+                                     io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
+                                {
+                                    io_data.m_currentScope.push_back( name );
+                                    ++io_data.m_currentToken;
+                                    io_data.m_state = ExpressionList;
+                                }
+                                else
+                                {
+                                    throw SyntaxError(); // Can't read scope
+                                }
+
+                            }
+                            else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeLeftDelimiter )
+                            {
+                                io_data.m_state = PushScope;
+                            }
+                            else
+                            {
+                                throw SyntaxError(); // Can't read scope
+                            }
+                        }
+                        else
+                        {
+                            io_data.m_state = nullptr;
+                        }
+                    }
+                    else
+                    {
+                        throw SyntaxError(); // Expected Line Delimiter
+                    }
+                }
+                else
+                {
+                    throw SyntaxError(); // Expected Scope Right Delimiter
+                }
+            }
+            else
+            {
+                throw SyntaxError(); // Expected Name
+            }
+        }
 
         void PopScope( ParserData & io_data )
         {}
