@@ -32,6 +32,7 @@ namespace cfg
             std::vector<lex::Token>::const_iterator m_currentToken;
             std::vector<lex::Token>::const_iterator const m_endToken;
             std::vector<std::string> m_currentScope;
+            int m_braces;
 
             ParserData( std::vector<lex::Token> const& i_tokenSequence );
         };
@@ -40,6 +41,7 @@ namespace cfg
             : m_state ( ExpressionList )
             , m_currentToken ( i_tokenSequence.begin() )
             , m_endToken ( i_tokenSequence.end() )
+            , m_braces ( 0 )
         {}
 
         void ExpressionList( ParserData & io_data )
@@ -162,12 +164,14 @@ namespace cfg
                             }
                             else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeTopDelimiter )
                             {
+
                                 ++io_data.m_currentToken;
                                 if ( io_data.m_currentToken != io_data.m_endToken &&
                                      io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
                                 {
                                     io_data.m_currentScope.push_back( name );
                                     ++io_data.m_currentToken;
+                                    ++io_data.m_braces;
                                     io_data.m_state = ExpressionList;
                                 }
                                 else
@@ -219,6 +223,11 @@ namespace cfg
             while ( data.m_state )
             {
                 data.m_state( data );
+            }
+
+            if ( data.m_braces != 0 )
+            {
+                throw SyntaxError(); // Missing braces
             }
 
             return data.m_expressionTree;
