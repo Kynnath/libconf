@@ -29,6 +29,7 @@ namespace cfg
         {
             std::vector< Expression > m_expressionTree;
             StateFunction m_state;
+            StateFunction m_propertyReturn;
             std::vector<lex::Token>::const_iterator m_currentToken;
             std::vector<lex::Token>::const_iterator const m_endToken;
             std::vector<std::string> m_currentScope;
@@ -39,6 +40,7 @@ namespace cfg
 
         ParserData::ParserData( std::vector<lex::Token> const& i_tokenSequence )
             : m_state ( ExpressionList )
+            , m_propertyReturn ( ExpressionList )
             , m_currentToken ( i_tokenSequence.begin() )
             , m_endToken ( i_tokenSequence.end() )
             , m_braces ( 0 )
@@ -52,6 +54,7 @@ namespace cfg
             }
             else if ( io_data.m_currentToken->GetType() == lex::Token::e_Name )
             {
+                io_data.m_propertyReturn = ExpressionList;
                 io_data.m_state = ReadProperty;
             }
             else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeLeftDelimiter )
@@ -119,7 +122,7 @@ namespace cfg
                          io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
                     {
                         io_data.m_expressionTree.push_back( Expression( Property( name, value ) ) );
-                        io_data.m_state = ExpressionList;
+                        io_data.m_state = io_data.m_propertyReturn;
                         ++io_data.m_currentToken;
                     }
                     else
@@ -240,7 +243,32 @@ namespace cfg
         }
 
         void PropertyList( ParserData & io_data )
-        {}
+        {
+            if ( io_data.m_currentToken->GetType() == lex::Token::e_Name )
+            {
+                io_data.m_propertyReturn = PropertyList;
+                io_data.m_state = ReadProperty;
+            }
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeLeftDelimiter )
+            {
+                io_data.m_currentScope.pop_back();
+                io_data.m_state = PushScope;
+            }
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeBottomDelimiter )
+            {
+                io_data.m_currentScope.pop_back();
+                io_data.m_state = PopScope;
+            }
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter ||
+                      io_data.m_currentToken->GetType() == lex::Token::e_Comment )
+            {
+                ++io_data.m_currentToken;
+            }
+            else
+            {
+                throw SyntaxError(); // Bad Property
+            }
+        }
 
         std::vector< Expression > BuildSyntaxTree( std::vector<lex::Token> const& i_tokenSequence )
         {
