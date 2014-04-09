@@ -164,7 +164,6 @@ namespace cfg
                             }
                             else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeTopDelimiter )
                             {
-
                                 ++io_data.m_currentToken;
                                 if ( io_data.m_currentToken != io_data.m_endToken &&
                                      io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
@@ -178,7 +177,6 @@ namespace cfg
                                 {
                                     throw SyntaxError(); // Can't read scope
                                 }
-
                             }
                             else if ( io_data.m_currentToken->GetType() == lex::Token::e_ScopeLeftDelimiter )
                             {
@@ -211,7 +209,35 @@ namespace cfg
         }
 
         void PopScope( ParserData & io_data )
-        {}
+        {
+            --io_data.m_braces;
+            if ( io_data.m_braces >= 0 )
+            {
+                io_data.m_currentScope.pop_back(); // After the if to ensure we don't try to pop and empty vector
+
+                ++io_data.m_currentToken;
+                if ( io_data.m_currentToken != io_data.m_endToken )
+                {
+                    if ( io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
+                    {
+                        ++io_data.m_currentToken;
+                        io_data.m_state = ExpressionList;
+                    }
+                    else
+                    {
+                        throw SyntaxError(); // Expected Line Delimiter
+                    }
+                }
+                else
+                {
+                    io_data.m_state = nullptr; // Valid to end on a brace
+                }
+            }
+            else
+            {
+                throw SyntaxError(); // Mismatched braces
+            }
+        }
 
         void PropertyList( ParserData & io_data )
         {}
