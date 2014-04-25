@@ -11,13 +11,13 @@ namespace cfg
 {
     namespace lex
     {
-        char const k_description[][38] =
+        char const k_description[][37] =
         {
-            "Escaped character not recognized.",
-            "Character not allowed to start token.",
-            "Name contains forbidden character.",
-            "Bad number format.",
-            "Ending quote missing from string."
+            "Escaped character not recognized",
+            "Character not allowed to start token",
+            "Name contains forbidden character",
+            "Bad number format",
+            "Ending quote missing from string"
         };
 
         LexerError::LexerError(const Type& i_errorType, const int& i_row, const int& i_column )
