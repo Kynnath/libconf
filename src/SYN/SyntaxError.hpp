@@ -20,18 +20,22 @@ namespace cfg
             public:
                 enum Type
                 {
-                    IllegalEscape,
-                    IllegalFirstCharacter,
-                    IllegalName,
-                    MisformedNumber,
-                    MissingQuote
+                    e_UnknownExpression,
+                    e_ExpectedLineDelimiter,
+                    e_ExpectedValue,
+                    e_ExpectedAssignment,
+                    e_IllformedScope,
+                    e_ExpectedScopeRightDelimiter,
+                    e_ExpectedName,
+                    e_MismatchedBracers,
+                    e_IllformedProperty
                 };
             private:
                 Type m_type;
                 int m_row;
                 int m_column;
             public:
-                SyntaxError();
+                SyntaxError( Type const& i_errorType, int const& i_row, int const& i_column );
                 int const& GetRow() const;
                 int const& GetColumn() const;
         };
