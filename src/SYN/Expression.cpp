@@ -22,5 +22,21 @@ namespace cfg
             , m_scope ( i_scope )
             , m_type ( Expression::e_Scope )
         {}
+
+        void Expression::Print( int const& i_indent ) const
+        {
+            if ( m_type == Expression::e_Property )
+            {
+                m_property.Print( i_indent );
+            }
+            else if ( m_type == Expression::e_Scope )
+            {
+                m_scope.Print( i_indent );
+                for ( auto const& expression : m_scope.GetExpressions() )
+                {
+                    expression.Print( i_indent+1 );
+                }
+            }
+        }
     }
 }

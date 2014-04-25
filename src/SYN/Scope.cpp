@@ -7,7 +7,9 @@
 
 #include "Scope.hpp"
 
-#include "Expression.hpp"
+#include <iostream>
+#include <string>
+#include "Expression.hpp" // Needed because of the expression vector
 
 namespace cfg
 {
@@ -16,5 +18,15 @@ namespace cfg
         Scope::Scope( std::string const& i_name )
             : m_name ( i_name )
         {}
+
+        std::vector< Expression > const& Scope::GetExpressions() const
+        {
+            return m_expressions;
+        }
+
+        void Scope::Print( int const& i_indent ) const
+        {
+            std::cout << std::string( " ", i_indent*4 ) << "[ " << m_name << "]" << std::endl;
+        }
     }
 }

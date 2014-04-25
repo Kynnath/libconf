@@ -32,6 +32,8 @@ namespace cfg
             public:
                 Expression( Property const& i_property );
                 Expression( Scope const& i_scope );
+
+                void Print( int const& i_indent = 0 ) const;
         };
 
     }

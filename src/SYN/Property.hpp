@@ -22,6 +22,8 @@ namespace cfg
 
             public:
                 Property( std::string const& i_name, Value const& i_value );
+
+                void Print( int const& i_indent ) const;
         };
     }
 }
