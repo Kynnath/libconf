@@ -54,6 +54,8 @@ namespace cfg
                 int const& GetInt() const;
                 float const& GetFloat() const;
                 std::string const& GetString() const;
+                int const& GetRow() const;
+                int const& GetColumn() const;
 
                 void Print() const;
         };

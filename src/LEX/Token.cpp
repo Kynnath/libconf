@@ -106,6 +106,16 @@ namespace cfg
             return m_stringValue;
         }
 
+        int const& Token::GetRow() const
+        {
+            return m_row;
+        }
+        
+        int const& Token::GetColumn() const
+        {
+            return m_column;
+        }
+
         void Token::Print() const
         {
             std::cout << m_row << ":" << m_column << " " << k_tokenType[ m_type ] << std::endl;
