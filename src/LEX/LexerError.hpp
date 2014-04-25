@@ -20,11 +20,11 @@ namespace cfg
             public:
                 enum Type
                 {
-                    IllegalEscape,
-                    IllegalFirstCharacter,
-                    IllegalName,
-                    MisformedNumber,
-                    MissingQuote
+                    e_IllegalEscape,
+                    e_IllegalFirstCharacter,
+                    e_IllegalName,
+                    e_MisformedNumber,
+                    e_MissingQuote
                 };
             private:
                 Type m_type;

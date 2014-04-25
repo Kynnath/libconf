@@ -152,7 +152,7 @@ namespace cfg
             }
             else
             {
-                throw LexerError( LexerError::IllegalFirstCharacter, io_lexerData.m_row, io_lexerData.m_column );
+                throw LexerError( LexerError::e_IllegalFirstCharacter, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
@@ -214,12 +214,12 @@ namespace cfg
                 }
                 else
                 {
-                    throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
+                    throw LexerError( LexerError::e_MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
                 }
             }
             else
             {
-                throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
+                throw LexerError( LexerError::e_MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
@@ -266,7 +266,7 @@ namespace cfg
                     }
                     else
                     {
-                        throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
+                        throw LexerError( LexerError::e_MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
                     }
                 }
             }
@@ -330,7 +330,7 @@ namespace cfg
                           !io_lexerData.m_character == k_underscore &&
                           !std::isdigit( io_lexerData.m_character ) )
                 {
-                    throw LexerError( LexerError::IllegalName, io_lexerData.m_row, io_lexerData.m_column );
+                    throw LexerError( LexerError::e_IllegalName, io_lexerData.m_row, io_lexerData.m_column );
                 }
             }
             else
@@ -383,7 +383,7 @@ namespace cfg
             }
             else
             {
-                throw LexerError( LexerError::MissingQuote, io_lexerData.m_row, io_lexerData.m_column );
+                throw LexerError( LexerError::e_MissingQuote, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
@@ -462,7 +462,7 @@ namespace cfg
                     }
                     else
                     {
-                        throw LexerError( LexerError::MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
+                        throw LexerError( LexerError::e_MisformedNumber, io_lexerData.m_row, io_lexerData.m_column );
                     }
                 }
             }
@@ -492,12 +492,12 @@ namespace cfg
                 }
                 else
                 {
-                    throw LexerError( LexerError::IllegalEscape, io_lexerData.m_row, io_lexerData.m_column );
+                    throw LexerError( LexerError::e_IllegalEscape, io_lexerData.m_row, io_lexerData.m_column );
                 }
             }
             else
             {
-                throw LexerError( LexerError::IllegalEscape, io_lexerData.m_row, io_lexerData.m_column );
+                throw LexerError( LexerError::e_IllegalEscape, io_lexerData.m_row, io_lexerData.m_column );
             }
         }
 
