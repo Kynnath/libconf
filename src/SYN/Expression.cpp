@@ -23,6 +23,16 @@ namespace cfg
             , m_type ( Expression::e_Scope )
         {}
 
+        Expression::Type const& Expression::GetType() const
+        {
+            return m_type;
+        }
+
+        Scope & Expression::GetScope()
+        {
+            return m_scope;
+        }
+
         void Expression::Print( int const& i_indent ) const
         {
             if ( m_type == Expression::e_Property )
@@ -32,10 +42,6 @@ namespace cfg
             else if ( m_type == Expression::e_Scope )
             {
                 m_scope.Print( i_indent );
-                for ( auto const& expression : m_scope.GetExpressions() )
-                {
-                    expression.Print( i_indent+1 );
-                }
             }
         }
     }
