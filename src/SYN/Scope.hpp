@@ -26,6 +26,8 @@ namespace cfg
             public:
                 Scope( std::string const& i_name );
                 std::vector< Expression > const& GetExpressions() const;
+                void PushExpression( Expression const& i_expression );
+                Scope & GetScope();
 
                 void Print( int const& i_indent ) const;
         };
