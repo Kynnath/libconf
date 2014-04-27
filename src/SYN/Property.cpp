@@ -21,7 +21,7 @@ namespace cfg
 
         void Property::Print( int const& i_indent ) const
         {
-            std::cout << std::string( " ", i_indent*4) << m_name << " = ";
+            std::cout << std::string( i_indent*4, ' ' ) << m_name << " = ";
 
             switch ( m_value.GetType() )
             {
