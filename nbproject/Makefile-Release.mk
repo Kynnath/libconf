@@ -35,11 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/ConfigParser.o \
 	${OBJECTDIR}/src/LEX/Lexer.o \
 	${OBJECTDIR}/src/LEX/LexerError.o \
 	${OBJECTDIR}/src/LEX/Token.o \
-	${OBJECTDIR}/src/Property.o \
 	${OBJECTDIR}/src/SYN/Expression.o \
 	${OBJECTDIR}/src/SYN/Parser.o \
 	${OBJECTDIR}/src/SYN/Property.o \
@@ -74,11 +72,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a
 
-${OBJECTDIR}/src/ConfigParser.o: src/ConfigParser.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ConfigParser.o src/ConfigParser.cpp
-
 ${OBJECTDIR}/src/LEX/Lexer.o: src/LEX/Lexer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/LEX
 	${RM} "$@.d"
@@ -93,11 +86,6 @@ ${OBJECTDIR}/src/LEX/Token.o: src/LEX/Token.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/LEX
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Token.o src/LEX/Token.cpp
-
-${OBJECTDIR}/src/Property.o: src/Property.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Property.o src/Property.cpp
 
 ${OBJECTDIR}/src/SYN/Expression.o: src/SYN/Expression.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/SYN
