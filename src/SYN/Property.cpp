@@ -19,6 +19,16 @@ namespace cfg
             , m_value ( i_value )
         {}
 
+        std::string const& Property::GetName() const
+        {
+            return m_name;
+        }
+
+        Value const& Property::GetValue() const
+        {
+            return m_value;
+        }
+
         void Property::Print( int const& i_indent ) const
         {
             std::cout << std::string( i_indent*4, ' ' ) << m_name << " = ";
