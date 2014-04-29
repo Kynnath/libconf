@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/LEX/Lexer.o \
 	${OBJECTDIR}/src/LEX/LexerError.o \
 	${OBJECTDIR}/src/LEX/Token.o \
+	${OBJECTDIR}/src/SEM/SemanticAnalyzer.o \
 	${OBJECTDIR}/src/SYN/Expression.o \
 	${OBJECTDIR}/src/SYN/Parser.o \
 	${OBJECTDIR}/src/SYN/Property.o \
@@ -86,6 +87,11 @@ ${OBJECTDIR}/src/LEX/Token.o: src/LEX/Token.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/LEX
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Token.o src/LEX/Token.cpp
+
+${OBJECTDIR}/src/SEM/SemanticAnalyzer.o: src/SEM/SemanticAnalyzer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/SEM
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SEM/SemanticAnalyzer.o src/SEM/SemanticAnalyzer.cpp
 
 ${OBJECTDIR}/src/SYN/Expression.o: src/SYN/Expression.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/SYN

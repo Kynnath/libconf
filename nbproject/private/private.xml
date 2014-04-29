@@ -7,26 +7,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/SyntaxError.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Value.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Scope.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Parser.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Parser.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Value.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/Token.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Expression.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Property.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Scope.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/Property.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Property.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/ConfigParser.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/SyntaxError.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/LexerError.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/ConfigParser.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/Token.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Expression.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/Property.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/LexerError.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Scope.cpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/LEX/Lexer.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/SyntaxError.cpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Property.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SEM/SemanticAnalyzer.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Expression.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Parser.cpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Parser.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Property.cpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Scope.hpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/Expression.cpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SEM/SemanticAnalyzer.cpp</file>
+            <file>file:/C:/Users/juan.garibotti/Documents/NetBeansProjects/libconf/src/SYN/SyntaxError.hpp</file>
         </group>
     </open-files>
 </project-private>
