@@ -7,6 +7,8 @@
 
 #include "Expression.hpp"
 
+#include <cassert>
+
 namespace cfg
 {
     namespace syn
@@ -28,9 +30,21 @@ namespace cfg
             return m_type;
         }
 
+        Scope const& Expression::GetScope() const
+        {
+            assert( m_type == e_Scope );
+            return m_scope;
+        }
+
         Scope & Expression::GetScope()
         {
-            return m_scope;
+            return ( const_cast<Scope&>( static_cast<Expression const&>(*this).GetScope() ) );
+        }
+
+        Property const& Expression::GetProperty() const
+        {
+            assert( m_type == e_Property );
+            return m_property;
         }
 
         void Expression::Print( int const& i_indent ) const

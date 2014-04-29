@@ -33,7 +33,9 @@ namespace cfg
                 Expression( Property const& i_property );
                 Expression( Scope const& i_scope );
                 Type const& GetType() const;
+                Scope const& GetScope() const;
                 Scope & GetScope();
+                Property const& GetProperty() const;
 
                 void Print( int const& i_indent = 0 ) const;
         };
