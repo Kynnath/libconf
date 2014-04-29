@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/Config.o \
 	${OBJECTDIR}/src/LEX/Lexer.o \
 	${OBJECTDIR}/src/LEX/LexerError.o \
 	${OBJECTDIR}/src/LEX/Token.o \
@@ -72,6 +73,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a: ${OBJECTFILES}
 	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a
+
+${OBJECTDIR}/src/Config.o: src/Config.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Config.o src/Config.cpp
 
 ${OBJECTDIR}/src/LEX/Lexer.o: src/LEX/Lexer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/LEX
