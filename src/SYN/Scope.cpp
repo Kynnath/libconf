@@ -20,6 +20,11 @@ namespace cfg
             : m_name ( i_name )
         {}
 
+        std::string const& Scope::GetName() const
+        {
+            return m_name;
+        }
+
         std::vector< Expression > const& Scope::GetExpressions() const
         {
             return m_expressions;
