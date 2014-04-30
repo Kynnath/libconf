@@ -10,13 +10,27 @@
 
 #include <map>
 #include <string>
-#include "SYN/Value.hpp"
 
 namespace cfg
 {
+    namespace syn
+    {
+        class Value;
+    }
+
+    enum class Value
+    {
+        e_Bool,
+        e_Int,
+        e_Float,
+        e_String
+    };
+
     class Config
     {
         std::map< std::string, syn::Value > m_symbolTable;
+
+        syn::Value const& GetValue( std::string const& i_property ) const;
 
         public:
             Config( std::string const& i_configFile );
@@ -24,7 +38,7 @@ namespace cfg
             int const& GetIntProperty( std::string const& i_intProperty ) const;
             float const& GetFloatProperty( std::string const& i_floatProperty ) const;
             std::string const& GetStringProperty( std::string const& i_stringProperty ) const;
-            bool PropertyExists( std::string const& i_propertyName, syn::Value::Type const& i_valueType ) const;
+            bool PropertyExists( std::string const& i_propertyName, Value const& i_valueType ) const;
     };
 }
 
