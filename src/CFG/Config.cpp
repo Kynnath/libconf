@@ -15,9 +15,7 @@
 
 namespace cfg
 {
-    bool Equals( Value const& i_leftType, syn::Value::Type const& i_rightType );
-
-    syn::Value const& Config::GetValue( std::string const& i_property ) const
+    Value const& Config::GetValue( std::string const& i_property ) const
     {
         auto const property ( m_symbolTable.find( i_property ) );
 
@@ -37,8 +35,8 @@ namespace cfg
 
     bool const& Config::GetBoolProperty( std::string const& i_boolProperty ) const
     {
-        syn::Value const& value ( GetValue( i_boolProperty ) );
-        if ( value.GetType() != syn::Value::e_Bool )
+        Value const& value ( GetValue( i_boolProperty ) );
+        if ( value.GetType() != Value::e_Bool )
         {
             throw std::exception(); // wrong type
         }
@@ -50,8 +48,8 @@ namespace cfg
 
     int const& Config::GetIntProperty( std::string const& i_intProperty ) const
     {
-        syn::Value const& value ( GetValue( i_intProperty ) );
-        if ( value.GetType() != syn::Value::e_Int )
+        Value const& value ( GetValue( i_intProperty ) );
+        if ( value.GetType() != Value::e_Int )
         {
             throw std::exception(); // wrong type
         }
@@ -63,8 +61,8 @@ namespace cfg
 
     float const& Config::GetFloatProperty( std::string const& i_floatProperty ) const
     {
-        syn::Value const& value ( GetValue( i_floatProperty ) );
-        if ( value.GetType() != syn::Value::e_Float )
+        Value const& value ( GetValue( i_floatProperty ) );
+        if ( value.GetType() != Value::e_Float )
         {
             throw std::exception(); // wrong type
         }
@@ -76,8 +74,8 @@ namespace cfg
 
     std::string const& Config::GetStringProperty( std::string const& i_stringProperty ) const
     {
-        syn::Value const& value ( GetValue( i_stringProperty ) );
-        if ( value.GetType() != syn::Value::e_String )
+        Value const& value ( GetValue( i_stringProperty ) );
+        if ( value.GetType() != Value::e_String )
         {
             throw std::exception(); // wrong type
         }
@@ -87,18 +85,10 @@ namespace cfg
         }
     }
 
-    bool Config::PropertyExists( std::string const& i_propertyName, Value const& i_valueType ) const
+    bool Config::PropertyExists( std::string const& i_propertyName, Value::Type const& i_valueType ) const
     {
         auto property ( m_symbolTable.find( i_propertyName ) );
-        return ( property != m_symbolTable.end() && Equals( i_valueType, property->second.GetType() ) );
-    }
-
-    bool Equals( Value const& i_leftValue, syn::Value::Type const& i_rightValue )
-    {
-        return ( i_leftValue == Value::e_Bool && i_rightValue == syn::Value::e_Bool ) ||
-               ( i_leftValue == Value::e_Int && i_rightValue == syn::Value::e_Int ) ||
-               ( i_leftValue == Value::e_Float && i_rightValue == syn::Value::e_Float ) ||
-               ( i_leftValue == Value::e_String && i_rightValue == syn::Value::e_String );
+        return ( property != m_symbolTable.end() && i_valueType == property->second.GetType() );
     }
 }
 

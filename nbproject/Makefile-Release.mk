@@ -45,7 +45,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CFG/SYN/Property.o \
 	${OBJECTDIR}/src/CFG/SYN/Scope.o \
 	${OBJECTDIR}/src/CFG/SYN/SyntaxError.o \
-	${OBJECTDIR}/src/CFG/SYN/Value.o
+	${OBJECTDIR}/src/CFG/Value.o
 
 
 # C Compiler Flags
@@ -124,10 +124,10 @@ ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o: src/CFG/SYN/SyntaxError.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o src/CFG/SYN/SyntaxError.cpp
 
-${OBJECTDIR}/src/CFG/SYN/Value.o: src/CFG/SYN/Value.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
+${OBJECTDIR}/src/CFG/Value.o: src/CFG/Value.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Value.o src/CFG/SYN/Value.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Value.o src/CFG/Value.cpp
 
 # Subprojects
 .build-subprojects:

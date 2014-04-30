@@ -7,25 +7,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/SyntaxError.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Scope.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Parser.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Parser.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/Token.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Expression.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Property.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/Config.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Scope.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Property.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/SyntaxError.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/LexerError.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SEM/SemanticAnalyzer.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SEM/SemanticAnalyzer.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/Token.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/Config.cpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/Lexer.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/SYN/Expression.hpp</file>
-            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/LEX/LexerError.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/Token.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/Token.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Parser.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Parser.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Expression.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/SyntaxError.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/SyntaxError.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/LexerError.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/LexerError.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Expression.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Property.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Property.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Scope.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Scope.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/Lexer.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SEM/SemanticAnalyzer.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/Config.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/Config.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SEM/SemanticAnalyzer.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Value.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Value.cpp</file>
         </group>
     </open-files>
 </project-private>

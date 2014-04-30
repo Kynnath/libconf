@@ -14,14 +14,16 @@
 
 namespace cfg
 {
+    class Value;
+
     namespace syn
     {
         class Expression;
-        class Value;
     }
+    
     namespace sem
     {
-        std::map< std::string, syn::Value > BuildSymbolTable( std::vector< syn::Expression > const& i_syntaxTree );
+        std::map< std::string, Value > BuildSymbolTable( std::vector< syn::Expression > const& i_syntaxTree );
     }
 }
 

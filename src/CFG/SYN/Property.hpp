@@ -9,7 +9,7 @@
 #define	PROPERTY_HPP
 
 #include <string>
-#include "Value.hpp"
+#include "CFG/Value.hpp"
 
 namespace cfg
 {

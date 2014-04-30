@@ -10,7 +10,7 @@
 #include <exception>
 #include <utility>
 #include "CFG/SYN/Expression.hpp"
-#include "CFG/SYN/Value.hpp"
+#include "CFG/Value.hpp"
 
 namespace cfg
 {
@@ -22,11 +22,11 @@ namespace cfg
 
         struct SemanticData
         {
-            std::map< std::string, syn::Value > m_symbolTable;
+            std::map< std::string, Value > m_symbolTable;
             std::vector< std::string > m_scopeStack;
         };
 
-        std::map< std::string, syn::Value > BuildSymbolTable( std::vector< syn::Expression > const& i_syntaxTree )
+        std::map< std::string, Value > BuildSymbolTable( std::vector< syn::Expression > const& i_syntaxTree )
         {
             SemanticData semanticData;
 

@@ -14,13 +14,13 @@
       </logicalFolder>
       <logicalFolder name="f2" displayName="SYN" projectFiles="true">
         <itemPath>src/CFG/SYN/Expression.hpp</itemPath>
-        <itemPath>src/CFG/Parser.hpp</itemPath>
+        <itemPath>src/CFG/SYN/Parser.hpp</itemPath>
         <itemPath>src/CFG/SYN/Property.hpp</itemPath>
-        <itemPath>src/CFG/Scope.hpp</itemPath>
+        <itemPath>src/CFG/SYN/Scope.hpp</itemPath>
         <itemPath>src/CFG/SYN/SyntaxError.hpp</itemPath>
-        <itemPath>src/CFG/Value.hpp</itemPath>
       </logicalFolder>
       <itemPath>src/CFG/Config.hpp</itemPath>
+      <itemPath>src/CFG/Value.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -39,7 +39,7 @@
       <itemPath>src/CFG/SEM/SemanticAnalyzer.cpp</itemPath>
       <itemPath>src/CFG/SYN/SyntaxError.cpp</itemPath>
       <itemPath>src/CFG/LEX/Token.cpp</itemPath>
-      <itemPath>src/CFG/SYN/Value.cpp</itemPath>
+      <itemPath>src/CFG/Value.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -100,8 +100,6 @@
       </item>
       <item path="src/CFG/LEX/Token.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/CFG/Parser.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/CFG/SEM/SemanticAnalyzer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/SEM/SemanticAnalyzer.hpp" ex="false" tool="3" flavor2="0">
@@ -112,19 +110,21 @@
       </item>
       <item path="src/CFG/SYN/Parser.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CFG/SYN/Parser.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CFG/SYN/Property.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/SYN/Property.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CFG/SYN/Scope.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CFG/SYN/Scope.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CFG/SYN/SyntaxError.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/SYN/SyntaxError.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/CFG/SYN/Value.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CFG/Scope.hpp" ex="false" tool="3" flavor2="0">
+      <item path="src/CFG/Value.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/Value.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -167,8 +167,6 @@
       </item>
       <item path="src/CFG/LEX/Token.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/CFG/Parser.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/CFG/SEM/SemanticAnalyzer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/SEM/SemanticAnalyzer.hpp" ex="false" tool="3" flavor2="0">
@@ -179,19 +177,21 @@
       </item>
       <item path="src/CFG/SYN/Parser.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CFG/SYN/Parser.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CFG/SYN/Property.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/SYN/Property.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/CFG/SYN/Scope.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="src/CFG/SYN/Scope.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/CFG/SYN/SyntaxError.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/SYN/SyntaxError.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/CFG/SYN/Value.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/CFG/Scope.hpp" ex="false" tool="3" flavor2="0">
+      <item path="src/CFG/Value.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/CFG/Value.hpp" ex="false" tool="3" flavor2="0">
       </item>
