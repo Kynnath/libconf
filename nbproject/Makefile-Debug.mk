@@ -35,17 +35,17 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/Config.o \
-	${OBJECTDIR}/src/LEX/Lexer.o \
-	${OBJECTDIR}/src/LEX/LexerError.o \
-	${OBJECTDIR}/src/LEX/Token.o \
-	${OBJECTDIR}/src/SEM/SemanticAnalyzer.o \
-	${OBJECTDIR}/src/SYN/Expression.o \
-	${OBJECTDIR}/src/SYN/Parser.o \
-	${OBJECTDIR}/src/SYN/Property.o \
-	${OBJECTDIR}/src/SYN/Scope.o \
-	${OBJECTDIR}/src/SYN/SyntaxError.o \
-	${OBJECTDIR}/src/SYN/Value.o
+	${OBJECTDIR}/src/CFG/Config.o \
+	${OBJECTDIR}/src/CFG/LEX/Lexer.o \
+	${OBJECTDIR}/src/CFG/LEX/LexerError.o \
+	${OBJECTDIR}/src/CFG/LEX/Token.o \
+	${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o \
+	${OBJECTDIR}/src/CFG/SYN/Expression.o \
+	${OBJECTDIR}/src/CFG/SYN/Parser.o \
+	${OBJECTDIR}/src/CFG/SYN/Property.o \
+	${OBJECTDIR}/src/CFG/SYN/Scope.o \
+	${OBJECTDIR}/src/CFG/SYN/SyntaxError.o \
+	${OBJECTDIR}/src/CFG/SYN/Value.o
 
 
 # C Compiler Flags
@@ -74,60 +74,60 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a
 
-${OBJECTDIR}/src/Config.o: src/Config.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
+${OBJECTDIR}/src/CFG/Config.o: src/CFG/Config.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Config.o src/Config.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp
 
-${OBJECTDIR}/src/LEX/Lexer.o: src/LEX/Lexer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/LEX
+${OBJECTDIR}/src/CFG/LEX/Lexer.o: src/CFG/LEX/Lexer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Lexer.o src/LEX/Lexer.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Lexer.o src/CFG/LEX/Lexer.cpp
 
-${OBJECTDIR}/src/LEX/LexerError.o: src/LEX/LexerError.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/LEX
+${OBJECTDIR}/src/CFG/LEX/LexerError.o: src/CFG/LEX/LexerError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/LexerError.o src/LEX/LexerError.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/LexerError.o src/CFG/LEX/LexerError.cpp
 
-${OBJECTDIR}/src/LEX/Token.o: src/LEX/Token.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/LEX
+${OBJECTDIR}/src/CFG/LEX/Token.o: src/CFG/LEX/Token.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/LEX/Token.o src/LEX/Token.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Token.o src/CFG/LEX/Token.cpp
 
-${OBJECTDIR}/src/SEM/SemanticAnalyzer.o: src/SEM/SemanticAnalyzer.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SEM
+${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o: src/CFG/SEM/SemanticAnalyzer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SEM/SemanticAnalyzer.o src/SEM/SemanticAnalyzer.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o src/CFG/SEM/SemanticAnalyzer.cpp
 
-${OBJECTDIR}/src/SYN/Expression.o: src/SYN/Expression.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SYN
+${OBJECTDIR}/src/CFG/SYN/Expression.o: src/CFG/SYN/Expression.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Expression.o src/SYN/Expression.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Expression.o src/CFG/SYN/Expression.cpp
 
-${OBJECTDIR}/src/SYN/Parser.o: src/SYN/Parser.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SYN
+${OBJECTDIR}/src/CFG/SYN/Parser.o: src/CFG/SYN/Parser.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Parser.o src/SYN/Parser.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Parser.o src/CFG/SYN/Parser.cpp
 
-${OBJECTDIR}/src/SYN/Property.o: src/SYN/Property.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SYN
+${OBJECTDIR}/src/CFG/SYN/Property.o: src/CFG/SYN/Property.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Property.o src/SYN/Property.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Property.o src/CFG/SYN/Property.cpp
 
-${OBJECTDIR}/src/SYN/Scope.o: src/SYN/Scope.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SYN
+${OBJECTDIR}/src/CFG/SYN/Scope.o: src/CFG/SYN/Scope.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Scope.o src/SYN/Scope.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Scope.o src/CFG/SYN/Scope.cpp
 
-${OBJECTDIR}/src/SYN/SyntaxError.o: src/SYN/SyntaxError.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SYN
+${OBJECTDIR}/src/CFG/SYN/SyntaxError.o: src/CFG/SYN/SyntaxError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/SyntaxError.o src/SYN/SyntaxError.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o src/CFG/SYN/SyntaxError.cpp
 
-${OBJECTDIR}/src/SYN/Value.o: src/SYN/Value.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/SYN
+${OBJECTDIR}/src/CFG/SYN/Value.o: src/CFG/SYN/Value.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/SYN/Value.o src/SYN/Value.cpp
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Value.o src/CFG/SYN/Value.cpp
 
 # Subprojects
 .build-subprojects:

@@ -9,8 +9,8 @@
 
 #include <exception>
 #include <utility>
-#include "SYN/Expression.hpp"
-#include "SYN/Value.hpp"
+#include "CFG/SYN/Expression.hpp"
+#include "CFG/SYN/Value.hpp"
 
 namespace cfg
 {

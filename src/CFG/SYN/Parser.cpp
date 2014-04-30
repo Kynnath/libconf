@@ -10,7 +10,7 @@
 #include <cassert>
 #include "Expression.hpp"
 #include "SyntaxError.hpp"
-#include "LEX/Token.hpp"
+#include "CFG/LEX/Token.hpp"
 
 namespace cfg
 {
