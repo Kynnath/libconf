@@ -15,6 +15,8 @@
 
 namespace cfg
 {
+    bool Equals( Value const& i_leftType, syn::Value::Type const& i_rightType );
+
     syn::Value const& Config::GetValue( std::string const& i_property ) const
     {
         auto const property ( m_symbolTable.find( i_property ) );
@@ -87,7 +89,16 @@ namespace cfg
 
     bool Config::PropertyExists( std::string const& i_propertyName, Value const& i_valueType ) const
     {
-        return false;
+        auto property ( m_symbolTable.find( i_propertyName ) );
+        return ( property != m_symbolTable.end() && Equals( i_valueType, property->second.GetType() ) );
+    }
+
+    bool Equals( Value const& i_leftValue, syn::Value::Type const& i_rightValue )
+    {
+        return ( i_leftValue == Value::e_Bool && i_rightValue == syn::Value::e_Bool ) ||
+               ( i_leftValue == Value::e_Int && i_rightValue == syn::Value::e_Int ) ||
+               ( i_leftValue == Value::e_Float && i_rightValue == syn::Value::e_Float ) ||
+               ( i_leftValue == Value::e_String && i_rightValue == syn::Value::e_String );
     }
 }
 
