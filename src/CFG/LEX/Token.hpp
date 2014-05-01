@@ -34,13 +34,13 @@ namespace cfg
                 };
 
             private:
-                Type m_type;
+                std::string m_stringValue;
                 int m_row;
                 int m_column;
                 int m_integerValue;
                 float m_floatValue;
+                Type m_type;
                 bool m_boolValue;
-                std::string m_stringValue;
 
             public:
                 Token( int const& i_row, int const& i_column, int const& i_value );

@@ -15,30 +15,30 @@ namespace cfg
     namespace lex
     {
         Token::Token( int const& i_row, int const& i_column, int const& i_value )
-            : m_type ( Token::e_Integer )
-            , m_row ( i_row )
+            : m_row ( i_row )
             , m_column ( i_column )
             , m_integerValue ( i_value )
+            , m_type ( Token::e_Integer )
         {}
 
         Token::Token( int const& i_row, int const& i_column, float const& i_value )
-            : m_type ( Token::e_Float )
-            , m_row ( i_row )
+            : m_row ( i_row )
             , m_column ( i_column )
             , m_floatValue ( i_value )
+            , m_type ( Token::e_Float )
         {}
 
         Token::Token( int const& i_row, int const& i_column, bool const& i_value )
-            : m_type ( Token::e_Bool )
-            , m_row ( i_row )
+            : m_row ( i_row )
             , m_column ( i_column )
+            , m_type ( Token::e_Bool )
             , m_boolValue ( i_value )
         {}
 
         Token::Token( int const& i_row, int const& i_column, Type const& i_type )
-            : m_type ( i_type )
-            , m_row ( i_row )
+            : m_row ( i_row )
             , m_column ( i_column )
+            , m_type ( i_type )
         {
             assert( m_type == e_ScopeLeftDelimiter ||
                     m_type == e_ScopeRightDelimiter ||
@@ -49,10 +49,10 @@ namespace cfg
         }
 
         Token::Token( int const& i_row, int const& i_column, Type const& i_type, std::string const& i_value )
-            : m_type ( i_type )
+            : m_stringValue ( i_value )
             , m_row ( i_row )
             , m_column ( i_column )
-            , m_stringValue ( i_value )
+            , m_type ( i_type )
         {
             assert( m_type == e_Comment ||
                     m_type == e_String ||
@@ -110,7 +110,7 @@ namespace cfg
         {
             return m_row;
         }
-        
+
         int const& Token::GetColumn() const
         {
             return m_column;
