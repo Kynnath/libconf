@@ -12,8 +12,8 @@
 namespace cfg
 {
     Value::Value( bool const& i_bool )
-        : m_bool ( i_bool )
-        , m_type ( e_Bool )
+        : m_type ( e_Bool )
+        , m_bool ( i_bool )
     {}
 
     Value::Value( int const& i_int )

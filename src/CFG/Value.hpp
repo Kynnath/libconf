@@ -24,12 +24,11 @@ namespace cfg
             };
 
         private:
-            bool m_bool;
+            std::string m_string;
             int m_int;
             float m_float;
-            std::string m_string;
-
             Type m_type;
+            bool m_bool;
 
         public:
             Value( bool const& i_bool );
