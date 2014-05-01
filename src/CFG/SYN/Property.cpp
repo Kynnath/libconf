@@ -7,6 +7,7 @@
 
 #include "Property.hpp"
 
+#include <cassert>
 #include <iostream>
 #include <string>
 
@@ -31,7 +32,7 @@ namespace cfg
 
         void Property::Print( int const& i_indent ) const
         {
-            std::cout << std::string( i_indent*4, ' ' ) << m_name << " = ";
+            std::cout << std::string( size_t(i_indent*4), ' ' ) << m_name << " = ";
 
             switch ( m_value.GetType() )
             {
@@ -61,6 +62,10 @@ namespace cfg
                 {
                     std::cout << "\"" << m_value.GetString() << "\"";
                     break;
+                }
+                default:
+                {
+                    assert(false); // Should never happen
                 }
             }
 
