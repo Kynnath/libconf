@@ -12,7 +12,9 @@
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/Value.cpp</file>
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/Lexer.hpp</file>
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/Token.hpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SEM/SemanticError.hpp</file>
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/LexerError.cpp</file>
+            <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SEM/SemanticError.cpp</file>
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/LEX/LexerError.hpp</file>
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/SyntaxError.cpp</file>
             <file>file:/C:/Users/JoPe/Documents/NetBeansProjects/libconf/src/CFG/SYN/Expression.hpp</file>

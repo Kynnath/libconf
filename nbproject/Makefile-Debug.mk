@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/CFG/Config.o \
+	${OBJECTDIR}/src/CFG/ConfigError.o \
 	${OBJECTDIR}/src/CFG/LEX/Lexer.o \
 	${OBJECTDIR}/src/CFG/LEX/LexerError.o \
 	${OBJECTDIR}/src/CFG/LEX/Token.o \
@@ -79,6 +80,11 @@ ${OBJECTDIR}/src/CFG/Config.o: src/CFG/Config.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/CFG
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp
+
+${OBJECTDIR}/src/CFG/ConfigError.o: src/CFG/ConfigError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -Isrc -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/ConfigError.o src/CFG/ConfigError.cpp
 
 ${OBJECTDIR}/src/CFG/LEX/Lexer.o: src/CFG/LEX/Lexer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
