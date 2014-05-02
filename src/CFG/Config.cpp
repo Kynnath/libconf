@@ -7,25 +7,32 @@
 
 #include "Config.hpp"
 
-#include <stdexcept>
 #include "LEX/Lexer.hpp"
 #include "SEM/SemanticAnalyzer.hpp"
 #include "SYN/Expression.hpp"
 #include "SYN/Parser.hpp"
+#include "ConfigError.hpp"
 
 namespace cfg
 {
-    Value const& Config::GetValue( std::string const& i_property ) const
+    Value const& Config::GetProperty( std::string const& i_property, Value::Type const& i_type ) const
     {
         auto const property ( m_symbolTable.find( i_property ) );
 
-        if ( property == m_symbolTable.end() )
+        if ( property != m_symbolTable.end() )
         {
-            throw std::exception(); // property not found
+            if ( property->second.GetType() == i_type )
+            {
+                return property->second;
+            }
+            else
+            {
+                throw ConfigError ( ConfigError::e_TypeMismatch );
+            }
         }
         else
         {
-            return property->second;
+            throw ConfigError ( ConfigError::e_MissingProperty );
         }
     }
 
@@ -35,59 +42,27 @@ namespace cfg
 
     bool const& Config::GetBoolProperty( std::string const& i_boolProperty ) const
     {
-        Value const& value ( GetValue( i_boolProperty ) );
-        if ( value.GetType() != Value::e_Bool )
-        {
-            throw std::exception(); // wrong type
-        }
-        else
-        {
-            return value.GetBool();
-        }
+        return GetProperty( i_boolProperty, Value::e_Bool ).GetBool();
     }
 
     int const& Config::GetIntProperty( std::string const& i_intProperty ) const
     {
-        Value const& value ( GetValue( i_intProperty ) );
-        if ( value.GetType() != Value::e_Int )
-        {
-            throw std::exception(); // wrong type
-        }
-        else
-        {
-            return value.GetInt();
-        }
+        return GetProperty( i_intProperty, Value::e_Int ).GetInt();
     }
 
     float const& Config::GetFloatProperty( std::string const& i_floatProperty ) const
     {
-        Value const& value ( GetValue( i_floatProperty ) );
-        if ( value.GetType() != Value::e_Float )
-        {
-            throw std::exception(); // wrong type
-        }
-        else
-        {
-            return value.GetFloat();
-        }
+        return GetProperty( i_floatProperty, Value::e_Float ).GetFloat();
     }
 
     std::string const& Config::GetStringProperty( std::string const& i_stringProperty ) const
     {
-        Value const& value ( GetValue( i_stringProperty ) );
-        if ( value.GetType() != Value::e_String )
-        {
-            throw std::exception(); // wrong type
-        }
-        else
-        {
-            return value.GetString();
-        }
+        return GetProperty( i_stringProperty, Value::e_String ).GetString();
     }
 
     bool Config::PropertyExists( std::string const& i_propertyName, Value::Type const& i_valueType ) const
     {
-        auto property ( m_symbolTable.find( i_propertyName ) );
+        auto const property ( m_symbolTable.find( i_propertyName ) );
         return ( property != m_symbolTable.end() && i_valueType == property->second.GetType() );
     }
 }

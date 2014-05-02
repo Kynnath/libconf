@@ -18,7 +18,7 @@ namespace cfg
     {
         std::map< std::string, Value > m_symbolTable;
 
-        Value const& GetValue( std::string const& i_property ) const;
+        Value const& GetProperty( std::string const& i_property, Value::Type const& i_type ) const;
 
         public:
             Config( std::string const& i_configFile );
