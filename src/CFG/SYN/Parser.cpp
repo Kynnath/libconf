@@ -121,18 +121,23 @@ namespace cfg
                        io_data.m_currentToken->GetType() == lex::Token::e_String ) )
                 {
                     Value value ( GetValue( *io_data.m_currentToken ) );
+
+                    io_data.m_scopeStack.back()->PushExpression( Expression( Property( name, value ) ) );
+                    io_data.m_state = io_data.m_propertyReturn;
+
                     ++io_data.m_currentToken;
-                    if ( io_data.m_currentToken != io_data.m_endToken &&
-                         io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
+
+                    if ( io_data.m_currentToken != io_data.m_endToken )
                     {
-                        io_data.m_scopeStack.back()->PushExpression( Expression( Property( name, value ) ) );
-                        io_data.m_state = io_data.m_propertyReturn;
-                        ++io_data.m_currentToken;
-                    }
-                    else
-                    {
-                        throw SyntaxError( SyntaxError::e_ExpectedLineDelimiter, io_data.m_currentToken->GetRow(), io_data.m_currentToken->GetColumn() ); // Expected line delimiter
-                    }
+                        if ( io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
+                        {
+                            ++io_data.m_currentToken;
+                        }
+                        else
+                        {
+                            throw SyntaxError( SyntaxError::e_ExpectedLineDelimiter, io_data.m_currentToken->GetRow(), io_data.m_currentToken->GetColumn() ); // Expected line delimiter
+                        }
+                    } // Allowed to end on a value
                 }
                 else
                 {
