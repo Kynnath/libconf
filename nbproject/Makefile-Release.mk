@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CFG/LEX/LexerError.o \
 	${OBJECTDIR}/src/CFG/LEX/Token.o \
 	${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o \
+	${OBJECTDIR}/src/CFG/SEM/SemanticError.o \
 	${OBJECTDIR}/src/CFG/SYN/Expression.o \
 	${OBJECTDIR}/src/CFG/SYN/Parser.o \
 	${OBJECTDIR}/src/CFG/SYN/Property.o \
@@ -98,6 +99,11 @@ ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o: src/CFG/SEM/SemanticAnalyzer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o src/CFG/SEM/SemanticAnalyzer.cpp
+
+${OBJECTDIR}/src/CFG/SEM/SemanticError.o: src/CFG/SEM/SemanticError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticError.o src/CFG/SEM/SemanticError.cpp
 
 ${OBJECTDIR}/src/CFG/SYN/Expression.o: src/CFG/SYN/Expression.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN

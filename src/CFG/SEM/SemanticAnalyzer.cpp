@@ -7,10 +7,9 @@
 
 #include "SemanticAnalyzer.hpp"
 
-#include <exception>
-#include <utility>
 #include "CFG/SYN/Expression.hpp"
 #include "CFG/Value.hpp"
+#include "SemanticError.hpp"
 
 namespace cfg
 {
@@ -45,7 +44,7 @@ namespace cfg
                                                                                  c_current->GetProperty().GetValue() ) ).second );
                     if ( !success )
                     {
-                        throw std::exception(); // SemanticError: symbol already defined
+                        throw SemanticError( QualifyPropertyName( io_data.m_scopeStack, c_current->GetProperty().GetName() ) ); // symbol already defined
                     }
                 }
                 else
