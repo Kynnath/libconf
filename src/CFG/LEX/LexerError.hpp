@@ -20,6 +20,7 @@ namespace cfg
             public:
                 enum Type
                 {
+                    e_MissingFile,
                     e_IllegalEscape,
                     e_IllegalFirstCharacter,
                     e_IllegalName,

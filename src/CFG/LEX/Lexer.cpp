@@ -505,6 +505,11 @@ namespace cfg
         {
             LexerData data ( i_configFile );
 
+            if ( !data.m_configFile.good() )
+            {
+                throw LexerError( LexerError::e_MissingFile, 0, 0 );
+            }
+
             while ( data.m_currentState )
             {
                 data.m_currentState( data );

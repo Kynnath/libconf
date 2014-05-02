@@ -13,6 +13,7 @@ namespace cfg
     {
         char const k_description[][37] =
         {
+            "Could not open file for reading",
             "Escaped character not recognized",
             "Character not allowed to start token",
             "Name contains forbidden character",
