@@ -54,11 +54,16 @@
                      projectFiles="true"
                      kind="TEST">
         <itemPath>tests/BoolProperty.conf</itemPath>
+        <itemPath>tests/BoolPropertyNN.conf</itemPath>
         <itemPath>tests/ConfigTests.cpp</itemPath>
         <itemPath>tests/FloatProperty.conf</itemPath>
+        <itemPath>tests/FloatPropertyNN.conf</itemPath>
         <itemPath>tests/IntProperty.conf</itemPath>
+        <itemPath>tests/IntPropertyNN.conf</itemPath>
         <itemPath>tests/Section.conf</itemPath>
+        <itemPath>tests/SectionNN.conf</itemPath>
         <itemPath>tests/StringProperty.conf</itemPath>
+        <itemPath>tests/StringPropertyNN.conf</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -216,15 +221,25 @@
       </item>
       <item path="tests/BoolProperty.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/BoolPropertyNN.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/ConfigTests.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/FloatProperty.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/FloatPropertyNN.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/IntProperty.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/IntPropertyNN.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/Section.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/SectionNN.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/StringProperty.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/StringPropertyNN.conf" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="3">
@@ -365,15 +380,25 @@
       </item>
       <item path="tests/BoolProperty.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/BoolPropertyNN.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/ConfigTests.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/FloatProperty.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/FloatPropertyNN.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/IntProperty.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/IntPropertyNN.conf" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/Section.conf" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="tests/SectionNN.conf" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="tests/StringProperty.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/StringPropertyNN.conf" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

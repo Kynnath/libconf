@@ -259,7 +259,11 @@ namespace cfg
 
         void PropertyList( ParserData & io_data )
         {
-            if ( io_data.m_currentToken->GetType() == lex::Token::e_Name )
+            if ( io_data.m_currentToken == io_data.m_endToken )
+            {
+                io_data.m_state = nullptr;
+            }
+            else if ( io_data.m_currentToken->GetType() == lex::Token::e_Name )
             {
                 io_data.m_propertyReturn = PropertyList;
                 io_data.m_state = ReadProperty;

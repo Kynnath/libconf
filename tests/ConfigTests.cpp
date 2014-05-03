@@ -12,13 +12,27 @@
 #include <iostream>
 #include "CFG/Config.hpp"
 
-void ReadBoolProperty();
-void ReadIntProperty();
-void ReadFloatProperty();
-void ReadStringProperty();
-void ReadSection();
+void ReadBoolPropertyNoNewLine();
+void ReadBoolPropertyNewLine();
+void ReadIntPropertyNoNewLine();
+void ReadIntPropertyNewLine();
+void ReadFloatPropertyNoNewLine();
+void ReadFloatPropertyNewLine();
+void ReadStringPropertyNoNewLine();
+void ReadStringPropertyNewLine();
+void ReadSectionNoNewLine();
+void ReadSectionNewLine();
 
-void ReadBoolProperty()
+void ReadBoolPropertyNoNewLine()
+{
+    cfg::Config const config ( "tests/BoolPropertyNN.conf" );
+    if ( config.GetBoolProperty( "boolProperty" ) != false )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadBoolPropertyNoNewLine (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadBoolPropertyNewLine()
 {
     cfg::Config const config ( "tests/BoolProperty.conf" );
     if ( config.GetBoolProperty( "boolProperty" ) != false )
@@ -27,7 +41,16 @@ void ReadBoolProperty()
     }
 }
 
-void ReadIntProperty()
+void ReadIntPropertyNoNewLine()
+{
+    cfg::Config const config ( "tests/IntPropertyNN.conf" );
+    if ( config.GetIntProperty( "intProperty" ) != 1 )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadIntProperty (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadIntPropertyNewLine()
 {
     cfg::Config const config ( "tests/IntProperty.conf" );
     if ( config.GetIntProperty( "intProperty" ) != 1 )
@@ -36,16 +59,34 @@ void ReadIntProperty()
     }
 }
 
-void ReadFloatProperty()
+void ReadFloatPropertyNoNewLine()
 {
-    cfg::Config const config ( "tests/FloatProperty.conf" );
-    if ( config.GetFloatProperty( "floatProperty" ) != 0.123f )
+    cfg::Config const config ( "tests/FloatPropertyNN.conf" );
+    if ( config.GetFloatProperty( "floatProperty" ) >= 0.123f )
     {
         std::cout << "%TEST_FAILED% time=0 testname=ReadFloatProperty (ConfigTests) message=Float value read: " << config.GetFloatProperty( "floatProperty" ) << std::endl;
     }
 }
 
-void ReadStringProperty()
+void ReadFloatPropertyNewLine()
+{
+    cfg::Config const config ( "tests/FloatProperty.conf" );
+    if ( config.GetFloatProperty( "floatProperty" ) >= 0.123f )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadFloatProperty (ConfigTests) message=Float value read: " << config.GetFloatProperty( "floatProperty" ) << std::endl;
+    }
+}
+
+void ReadStringPropertyNoNewLine()
+{
+    cfg::Config const config ( "tests/StringPropertyNN.conf" );
+    if ( config.GetStringProperty( "stringProperty" ) != "I am a string" )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadStringPropertyNewLine()
 {
     cfg::Config const config ( "tests/StringProperty.conf" );
     if ( config.GetStringProperty( "stringProperty" ) != "I am a string" )
@@ -54,7 +95,17 @@ void ReadStringProperty()
     }
 }
 
-void ReadSection()
+void ReadSectionNoNewLine()
+{
+    cfg::Config const config ( "tests/SectionNN.conf" );
+
+    if ( config.GetStringProperty( "Window::title" ) != "Pong" )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadSectionNewLine()
 {
     cfg::Config const config ( "tests/Section.conf" );
 
@@ -69,25 +120,40 @@ int main()
     std::cout << "%SUITE_STARTING% ConfigTests" << std::endl;
     std::cout << "%SUITE_STARTED%" << std::endl;
 
-    std::cout << "%TEST_STARTED% ReadBoolProperty (ConfigTests)" << std::endl;
-    ReadBoolProperty();
+    std::cout << "%TEST_STARTED% ReadBoolPropertyNewLine (ConfigTests)" << std::endl;
+    ReadBoolPropertyNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadBoolPropertyNewLine (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadBoolPropertyNoNewLine (ConfigTests)" << std::endl;
+    ReadBoolPropertyNoNewLine();
     std::cout << "%TEST_FINISHED% time=0 ReadBoolProperty (ConfigTests)" << std::endl;
 
-    std::cout << "%TEST_STARTED% ReadIntProperty (ConfigTests)" << std::endl;
-    ReadIntProperty();
-    std::cout << "%TEST_FINISHED% time=0 ReadIntProperty (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadIntPropertyNewLine (ConfigTests)" << std::endl;
+    ReadIntPropertyNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadIntPropertyNewLine (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadIntPropertyNoNewLine (ConfigTests)" << std::endl;
+    ReadIntPropertyNoNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadIntPropertyNoNewLine (ConfigTests)" << std::endl;
 
-    std::cout << "%TEST_STARTED% ReadFloatProperty (ConfigTests)" << std::endl;
-    ReadFloatProperty();
-    std::cout << "%TEST_FINISHED% time=0 ReadFloatProperty (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadFloatPropertyNewLine (ConfigTests)" << std::endl;
+    ReadFloatPropertyNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadFloatPropertyNewLine (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadFloatPropertyNoNewLine (ConfigTests)" << std::endl;
+    ReadFloatPropertyNoNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadFloatPropertyNoNewLine (ConfigTests)" << std::endl;
 
-    std::cout << "%TEST_STARTED% ReadStringProperty (ConfigTests)" << std::endl;
-    ReadStringProperty();
-    std::cout << "%TEST_FINISHED% time=0 ReadStringProperty (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadStringPropertyNewLine (ConfigTests)" << std::endl;
+    ReadStringPropertyNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadStringPropertyNewLine (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadStringPropertyNoNewLine (ConfigTests)" << std::endl;
+    ReadStringPropertyNoNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadStringPropertyNoNewLine (ConfigTests)" << std::endl;
 
-    std::cout << "%TEST_STARTED% ReadSection (ConfigTests)" << std::endl;
-    ReadSection();
-    std::cout << "%TEST_FINISHED% time=0 ReadSection (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadSectionNewLine (ConfigTests)" << std::endl;
+    ReadSectionNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadSectionNoNewLine (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadSectionNoNewLine (ConfigTests)" << std::endl;
+    ReadSectionNoNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadSectionNoNewLine (ConfigTests)" << std::endl;
 
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
 
