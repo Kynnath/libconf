@@ -127,7 +127,11 @@ namespace cfg
 
                     ++io_data.m_currentToken;
 
-                    if ( io_data.m_currentToken != io_data.m_endToken )
+                    if ( io_data.m_currentToken == io_data.m_endToken )
+                    {
+                        io_data.m_state = nullptr; // Allowed to end on a value
+                    }
+                    else
                     {
                         if ( io_data.m_currentToken->GetType() == lex::Token::e_LineDelimiter )
                         {
@@ -137,7 +141,7 @@ namespace cfg
                         {
                             throw SyntaxError( SyntaxError::e_ExpectedLineDelimiter, io_data.m_currentToken->GetRow(), io_data.m_currentToken->GetColumn() ); // Expected line delimiter
                         }
-                    } // Allowed to end on a value
+                    }
                 }
                 else
                 {

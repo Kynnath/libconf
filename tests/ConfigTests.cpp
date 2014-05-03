@@ -16,10 +16,10 @@ void ReadBoolProperty();
 void ReadIntProperty();
 void ReadFloatProperty();
 void ReadStringProperty();
+void ReadSection();
 
 void ReadBoolProperty()
 {
-    std::cout << "ConfigTests ReadBoolProperty" << std::endl;
     cfg::Config const config ( "tests/BoolProperty.conf" );
     if ( config.GetBoolProperty( "boolProperty" ) != false )
     {
@@ -29,7 +29,6 @@ void ReadBoolProperty()
 
 void ReadIntProperty()
 {
-    std::cout << "ConfigTests ReadIntProperty" << std::endl;
     cfg::Config const config ( "tests/IntProperty.conf" );
     if ( config.GetIntProperty( "intProperty" ) != 1 )
     {
@@ -39,7 +38,6 @@ void ReadIntProperty()
 
 void ReadFloatProperty()
 {
-    std::cout << "ConfigTests ReadFloatProperty" << std::endl;
     cfg::Config const config ( "tests/FloatProperty.conf" );
     if ( config.GetFloatProperty( "floatProperty" ) != 0.123f )
     {
@@ -49,9 +47,18 @@ void ReadFloatProperty()
 
 void ReadStringProperty()
 {
-    std::cout << "ConfigTests ReadStringProperty" << std::endl;
     cfg::Config const config ( "tests/StringProperty.conf" );
     if ( config.GetStringProperty( "stringProperty" ) != "I am a string" )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadSection()
+{
+    cfg::Config const config ( "tests/Section.conf" );
+
+    if ( config.GetStringProperty( "Window::title" ) != "Pong" )
     {
         std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
     }
@@ -77,6 +84,10 @@ int main()
     std::cout << "%TEST_STARTED% ReadStringProperty (ConfigTests)" << std::endl;
     ReadStringProperty();
     std::cout << "%TEST_FINISHED% time=0 ReadStringProperty (ConfigTests)" << std::endl;
+
+    std::cout << "%TEST_STARTED% ReadSection (ConfigTests)" << std::endl;
+    ReadSection();
+    std::cout << "%TEST_FINISHED% time=0 ReadSection (ConfigTests)" << std::endl;
 
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
 

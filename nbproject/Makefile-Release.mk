@@ -54,10 +54,7 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f4 \
-	${TESTDIR}/TestFiles/f1 \
-	${TESTDIR}/TestFiles/f3 \
-	${TESTDIR}/TestFiles/f2
+	${TESTDIR}/TestFiles/f4
 
 # C Compiler Flags
 CFLAGS=
@@ -159,41 +156,11 @@ ${TESTDIR}/TestFiles/f4: ${TESTDIR}/tests/ConfigTests.o ${OBJECTFILES:%.o=%_noma
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f4 $^ ${LDLIBSOPTIONS} 
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/LexerTests.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
-
-${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/SemanticTests.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} 
-
-${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/SyntaxTests.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} 
-
 
 ${TESTDIR}/tests/ConfigTests.o: tests/ConfigTests.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/ConfigTests.o tests/ConfigTests.cpp
-
-
-${TESTDIR}/tests/LexerTests.o: tests/LexerTests.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I. -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/LexerTests.o tests/LexerTests.cpp
-
-
-${TESTDIR}/tests/SemanticTests.o: tests/SemanticTests.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SemanticTests.o tests/SemanticTests.cpp
-
-
-${TESTDIR}/tests/SyntaxTests.o: tests/SyntaxTests.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SyntaxTests.o tests/SyntaxTests.cpp
 
 
 ${OBJECTDIR}/src/CFG/Config_nomain.o: ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp 
@@ -370,9 +337,6 @@ ${OBJECTDIR}/src/CFG/Value_nomain.o: ${OBJECTDIR}/src/CFG/Value.o src/CFG/Value.
 	@if [ "${TEST}" = "" ]; \
 	then  \
 	    ${TESTDIR}/TestFiles/f4 || true; \
-	    ${TESTDIR}/TestFiles/f1 || true; \
-	    ${TESTDIR}/TestFiles/f3 || true; \
-	    ${TESTDIR}/TestFiles/f2 || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi
