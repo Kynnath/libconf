@@ -49,6 +49,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/CFG/SYN/SyntaxError.o \
 	${OBJECTDIR}/src/CFG/Value.o
 
+# Test Directory
+TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
+
+# Test Files
+TESTFILES= \
+	${TESTDIR}/TestFiles/f4 \
+	${TESTDIR}/TestFiles/f1 \
+	${TESTDIR}/TestFiles/f3 \
+	${TESTDIR}/TestFiles/f2
 
 # C Compiler Flags
 CFLAGS=
@@ -143,6 +152,230 @@ ${OBJECTDIR}/src/CFG/Value.o: src/CFG/Value.cpp
 
 # Subprojects
 .build-subprojects:
+
+# Build Test Targets
+.build-tests-conf: .build-conf ${TESTFILES}
+${TESTDIR}/TestFiles/f4: ${TESTDIR}/tests/ConfigTests.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f4 $^ ${LDLIBSOPTIONS} 
+
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/LexerTests.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
+
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/SemanticTests.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} 
+
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/SyntaxTests.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} 
+
+
+${TESTDIR}/tests/ConfigTests.o: tests/ConfigTests.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/ConfigTests.o tests/ConfigTests.cpp
+
+
+${TESTDIR}/tests/LexerTests.o: tests/LexerTests.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/LexerTests.o tests/LexerTests.cpp
+
+
+${TESTDIR}/tests/SemanticTests.o: tests/SemanticTests.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SemanticTests.o tests/SemanticTests.cpp
+
+
+${TESTDIR}/tests/SyntaxTests.o: tests/SyntaxTests.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SyntaxTests.o tests/SyntaxTests.cpp
+
+
+${OBJECTDIR}/src/CFG/Config_nomain.o: ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/Config.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config_nomain.o src/CFG/Config.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/Config.o ${OBJECTDIR}/src/CFG/Config_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/ConfigError_nomain.o: ${OBJECTDIR}/src/CFG/ConfigError.o src/CFG/ConfigError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/ConfigError.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/ConfigError_nomain.o src/CFG/ConfigError.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/ConfigError.o ${OBJECTDIR}/src/CFG/ConfigError_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o: ${OBJECTDIR}/src/CFG/LEX/Lexer.o src/CFG/LEX/Lexer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/LEX/Lexer.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o src/CFG/LEX/Lexer.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/LEX/Lexer.o ${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o: ${OBJECTDIR}/src/CFG/LEX/LexerError.o src/CFG/LEX/LexerError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/LEX/LexerError.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o src/CFG/LEX/LexerError.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/LEX/LexerError.o ${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/LEX/Token_nomain.o: ${OBJECTDIR}/src/CFG/LEX/Token.o src/CFG/LEX/Token.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/LEX/Token.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Token_nomain.o src/CFG/LEX/Token.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/LEX/Token.o ${OBJECTDIR}/src/CFG/LEX/Token_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o: ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o src/CFG/SEM/SemanticAnalyzer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o src/CFG/SEM/SemanticAnalyzer.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o: ${OBJECTDIR}/src/CFG/SEM/SemanticError.o src/CFG/SEM/SemanticError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SEM/SemanticError.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o src/CFG/SEM/SemanticError.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SEM/SemanticError.o ${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Expression.o src/CFG/SYN/Expression.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SYN/Expression.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o src/CFG/SYN/Expression.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Expression.o ${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Parser.o src/CFG/SYN/Parser.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SYN/Parser.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o src/CFG/SYN/Parser.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Parser.o ${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SYN/Property_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Property.o src/CFG/SYN/Property.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SYN/Property.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Property_nomain.o src/CFG/SYN/Property.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Property.o ${OBJECTDIR}/src/CFG/SYN/Property_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Scope.o src/CFG/SYN/Scope.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SYN/Scope.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o src/CFG/SYN/Scope.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Scope.o ${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o: ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o src/CFG/SYN/SyntaxError.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o src/CFG/SYN/SyntaxError.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o ${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o;\
+	fi
+
+${OBJECTDIR}/src/CFG/Value_nomain.o: ${OBJECTDIR}/src/CFG/Value.o src/CFG/Value.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/CFG
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/CFG/Value.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Value_nomain.o src/CFG/Value.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/src/CFG/Value.o ${OBJECTDIR}/src/CFG/Value_nomain.o;\
+	fi
+
+# Run Test Targets
+.test-conf:
+	@if [ "${TEST}" = "" ]; \
+	then  \
+	    ${TESTDIR}/TestFiles/f4 || true; \
+	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
+	    ${TESTDIR}/TestFiles/f2 || true; \
+	else  \
+	    ./${TEST} || true; \
+	fi
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
