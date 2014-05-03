@@ -22,6 +22,8 @@ void ReadStringPropertyNoNewLine();
 void ReadStringPropertyNewLine();
 void ReadSectionNoNewLine();
 void ReadSectionNewLine();
+void ReadGroupNoNewLine();
+void ReadGroupNewLine();
 
 void ReadBoolPropertyNoNewLine()
 {
@@ -37,7 +39,7 @@ void ReadBoolPropertyNewLine()
     cfg::Config const config ( "tests/BoolProperty.conf" );
     if ( config.GetBoolProperty( "boolProperty" ) != false )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadBoolProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadBoolPropertyNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
@@ -46,7 +48,7 @@ void ReadIntPropertyNoNewLine()
     cfg::Config const config ( "tests/IntPropertyNN.conf" );
     if ( config.GetIntProperty( "intProperty" ) != 1 )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadIntProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadIntPropertyNoNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
@@ -55,25 +57,25 @@ void ReadIntPropertyNewLine()
     cfg::Config const config ( "tests/IntProperty.conf" );
     if ( config.GetIntProperty( "intProperty" ) != 1 )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadIntProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadIntPropertyNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
 void ReadFloatPropertyNoNewLine()
 {
     cfg::Config const config ( "tests/FloatPropertyNN.conf" );
-    if ( config.GetFloatProperty( "floatProperty" ) >= 0.123f )
+    if ( config.GetFloatProperty( "floatProperty" ) != 0.123f )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadFloatProperty (ConfigTests) message=Float value read: " << config.GetFloatProperty( "floatProperty" ) << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadFloatPropertyNoNewLine (ConfigTests) message=Float value read: " << config.GetFloatProperty( "floatProperty" ) << std::endl;
     }
 }
 
 void ReadFloatPropertyNewLine()
 {
     cfg::Config const config ( "tests/FloatProperty.conf" );
-    if ( config.GetFloatProperty( "floatProperty" ) >= 0.123f )
+    if ( config.GetFloatProperty( "floatProperty" ) != 0.123f )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadFloatProperty (ConfigTests) message=Float value read: " << config.GetFloatProperty( "floatProperty" ) << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadFloatPropertyNewLine (ConfigTests) message=Float value read: " << config.GetFloatProperty( "floatProperty" ) << std::endl;
     }
 }
 
@@ -82,7 +84,7 @@ void ReadStringPropertyNoNewLine()
     cfg::Config const config ( "tests/StringPropertyNN.conf" );
     if ( config.GetStringProperty( "stringProperty" ) != "I am a string" )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadStringPropertyNoNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
@@ -91,7 +93,7 @@ void ReadStringPropertyNewLine()
     cfg::Config const config ( "tests/StringProperty.conf" );
     if ( config.GetStringProperty( "stringProperty" ) != "I am a string" )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadStringPropertyNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
@@ -101,7 +103,7 @@ void ReadSectionNoNewLine()
 
     if ( config.GetStringProperty( "Window::title" ) != "Pong" )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadSectionNoNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
@@ -111,7 +113,27 @@ void ReadSectionNewLine()
 
     if ( config.GetStringProperty( "Window::title" ) != "Pong" )
     {
-        std::cout << "%TEST_FAILED% time=0 testname=ReadStringProperty (ConfigTests) message=Could not read property." << std::endl;
+        std::cout << "%TEST_FAILED% time=0 testname=ReadSectionNewLine (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadGroupNoNewLine()
+{
+    cfg::Config const config ( "tests/GroupNN.conf" );
+
+    if ( config.GetStringProperty( "Config::Window::title" ) != "Pong" )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadGroupNoNewLine (ConfigTests) message=Could not read property." << std::endl;
+    }
+}
+
+void ReadGroupNewLine()
+{
+    cfg::Config const config ( "tests/Group.conf" );
+
+    if ( config.GetStringProperty( "Config::Window::title" ) != "Pong" )
+    {
+        std::cout << "%TEST_FAILED% time=0 testname=ReadGroupNewLine (ConfigTests) message=Could not read property." << std::endl;
     }
 }
 
@@ -154,6 +176,13 @@ int main()
     std::cout << "%TEST_STARTED% ReadSectionNoNewLine (ConfigTests)" << std::endl;
     ReadSectionNoNewLine();
     std::cout << "%TEST_FINISHED% time=0 ReadSectionNoNewLine (ConfigTests)" << std::endl;
+
+    std::cout << "%TEST_STARTED% ReadGroupNewLine (ConfigTests)" << std::endl;
+    ReadGroupNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadGroupNewLine (ConfigTests)" << std::endl;
+    std::cout << "%TEST_STARTED% ReadGroupNoNewLine (ConfigTests)" << std::endl;
+    ReadGroupNoNewLine();
+    std::cout << "%TEST_FINISHED% time=0 ReadGroupNoNewLine (ConfigTests)" << std::endl;
 
     std::cout << "%SUITE_FINISHED% time=0" << std::endl;
 
