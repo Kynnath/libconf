@@ -34,21 +34,22 @@ namespace cfg
         struct LexerData
         {
             std::ifstream m_configFile;
-            int m_row, m_rowFirst;
-            int m_column, m_columnFirst;
             std::vector<Token> m_tokenSequence;
-            char m_character;
             std::string m_characterSequence;
             StateFunction m_currentState;
+            int m_row, m_rowFirst;
+            int m_column, m_columnFirst;
+            char m_character;
 
             LexerData( std::string const& i_configFile );
         };
 
         LexerData::LexerData( std::string const& i_configFile )
             : m_configFile ( i_configFile )
+            , m_currentState ( Initial )
             , m_row ( 1 ), m_rowFirst ( 1 )
             , m_column ( 0 ), m_columnFirst ( 0 )
-            , m_currentState ( Initial )
+            , m_character ( 0 )
         {}
 
         char const k_reserved[] =
