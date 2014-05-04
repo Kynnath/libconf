@@ -85,67 +85,67 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibconf.a: ${OBJECTFILES}
 ${OBJECTDIR}/src/CFG/Config.o: src/CFG/Config.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp
 
 ${OBJECTDIR}/src/CFG/ConfigError.o: src/CFG/ConfigError.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/ConfigError.o src/CFG/ConfigError.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/ConfigError.o src/CFG/ConfigError.cpp
 
 ${OBJECTDIR}/src/CFG/LEX/Lexer.o: src/CFG/LEX/Lexer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Lexer.o src/CFG/LEX/Lexer.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Lexer.o src/CFG/LEX/Lexer.cpp
 
 ${OBJECTDIR}/src/CFG/LEX/LexerError.o: src/CFG/LEX/LexerError.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/LexerError.o src/CFG/LEX/LexerError.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/LexerError.o src/CFG/LEX/LexerError.cpp
 
 ${OBJECTDIR}/src/CFG/LEX/Token.o: src/CFG/LEX/Token.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/LEX
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Token.o src/CFG/LEX/Token.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Token.o src/CFG/LEX/Token.cpp
 
 ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o: src/CFG/SEM/SemanticAnalyzer.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o src/CFG/SEM/SemanticAnalyzer.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o src/CFG/SEM/SemanticAnalyzer.cpp
 
 ${OBJECTDIR}/src/CFG/SEM/SemanticError.o: src/CFG/SEM/SemanticError.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SEM
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticError.o src/CFG/SEM/SemanticError.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticError.o src/CFG/SEM/SemanticError.cpp
 
 ${OBJECTDIR}/src/CFG/SYN/Expression.o: src/CFG/SYN/Expression.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Expression.o src/CFG/SYN/Expression.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Expression.o src/CFG/SYN/Expression.cpp
 
 ${OBJECTDIR}/src/CFG/SYN/Parser.o: src/CFG/SYN/Parser.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Parser.o src/CFG/SYN/Parser.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Parser.o src/CFG/SYN/Parser.cpp
 
 ${OBJECTDIR}/src/CFG/SYN/Property.o: src/CFG/SYN/Property.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Property.o src/CFG/SYN/Property.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Property.o src/CFG/SYN/Property.cpp
 
 ${OBJECTDIR}/src/CFG/SYN/Scope.o: src/CFG/SYN/Scope.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Scope.o src/CFG/SYN/Scope.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Scope.o src/CFG/SYN/Scope.cpp
 
 ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o: src/CFG/SYN/SyntaxError.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG/SYN
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o src/CFG/SYN/SyntaxError.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o src/CFG/SYN/SyntaxError.cpp
 
 ${OBJECTDIR}/src/CFG/Value.o: src/CFG/Value.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/CFG
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Value.o src/CFG/Value.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Value.o src/CFG/Value.cpp
 
 # Subprojects
 .build-subprojects:
@@ -160,7 +160,7 @@ ${TESTDIR}/TestFiles/f4: ${TESTDIR}/tests/ConfigTests.o ${OBJECTFILES:%.o=%_noma
 ${TESTDIR}/tests/ConfigTests.o: tests/ConfigTests.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/ConfigTests.o tests/ConfigTests.cpp
+	$(COMPILE.cc) -O2 -I. -I. -I. -I. -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/ConfigTests.o tests/ConfigTests.cpp
 
 
 ${OBJECTDIR}/src/CFG/Config_nomain.o: ${OBJECTDIR}/src/CFG/Config.o src/CFG/Config.cpp 
@@ -171,7 +171,7 @@ ${OBJECTDIR}/src/CFG/Config_nomain.o: ${OBJECTDIR}/src/CFG/Config.o src/CFG/Conf
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config_nomain.o src/CFG/Config.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Config_nomain.o src/CFG/Config.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/Config.o ${OBJECTDIR}/src/CFG/Config_nomain.o;\
 	fi
@@ -184,7 +184,7 @@ ${OBJECTDIR}/src/CFG/ConfigError_nomain.o: ${OBJECTDIR}/src/CFG/ConfigError.o sr
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/ConfigError_nomain.o src/CFG/ConfigError.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/ConfigError_nomain.o src/CFG/ConfigError.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/ConfigError.o ${OBJECTDIR}/src/CFG/ConfigError_nomain.o;\
 	fi
@@ -197,7 +197,7 @@ ${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o: ${OBJECTDIR}/src/CFG/LEX/Lexer.o src/CF
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o src/CFG/LEX/Lexer.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o src/CFG/LEX/Lexer.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/LEX/Lexer.o ${OBJECTDIR}/src/CFG/LEX/Lexer_nomain.o;\
 	fi
@@ -210,7 +210,7 @@ ${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o: ${OBJECTDIR}/src/CFG/LEX/LexerErro
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o src/CFG/LEX/LexerError.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o src/CFG/LEX/LexerError.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/LEX/LexerError.o ${OBJECTDIR}/src/CFG/LEX/LexerError_nomain.o;\
 	fi
@@ -223,7 +223,7 @@ ${OBJECTDIR}/src/CFG/LEX/Token_nomain.o: ${OBJECTDIR}/src/CFG/LEX/Token.o src/CF
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Token_nomain.o src/CFG/LEX/Token.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/LEX/Token_nomain.o src/CFG/LEX/Token.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/LEX/Token.o ${OBJECTDIR}/src/CFG/LEX/Token_nomain.o;\
 	fi
@@ -236,7 +236,7 @@ ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o: ${OBJECTDIR}/src/CFG/SEM/Sem
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o src/CFG/SEM/SemanticAnalyzer.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o src/CFG/SEM/SemanticAnalyzer.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer.o ${OBJECTDIR}/src/CFG/SEM/SemanticAnalyzer_nomain.o;\
 	fi
@@ -249,7 +249,7 @@ ${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o: ${OBJECTDIR}/src/CFG/SEM/Semant
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o src/CFG/SEM/SemanticError.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o src/CFG/SEM/SemanticError.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SEM/SemanticError.o ${OBJECTDIR}/src/CFG/SEM/SemanticError_nomain.o;\
 	fi
@@ -262,7 +262,7 @@ ${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Expressio
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o src/CFG/SYN/Expression.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o src/CFG/SYN/Expression.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Expression.o ${OBJECTDIR}/src/CFG/SYN/Expression_nomain.o;\
 	fi
@@ -275,7 +275,7 @@ ${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Parser.o src/
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o src/CFG/SYN/Parser.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o src/CFG/SYN/Parser.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Parser.o ${OBJECTDIR}/src/CFG/SYN/Parser_nomain.o;\
 	fi
@@ -288,7 +288,7 @@ ${OBJECTDIR}/src/CFG/SYN/Property_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Property.o 
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Property_nomain.o src/CFG/SYN/Property.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Property_nomain.o src/CFG/SYN/Property.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Property.o ${OBJECTDIR}/src/CFG/SYN/Property_nomain.o;\
 	fi
@@ -301,7 +301,7 @@ ${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o: ${OBJECTDIR}/src/CFG/SYN/Scope.o src/CF
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o src/CFG/SYN/Scope.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o src/CFG/SYN/Scope.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SYN/Scope.o ${OBJECTDIR}/src/CFG/SYN/Scope_nomain.o;\
 	fi
@@ -314,7 +314,7 @@ ${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o: ${OBJECTDIR}/src/CFG/SYN/SyntaxEr
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o src/CFG/SYN/SyntaxError.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o src/CFG/SYN/SyntaxError.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/SYN/SyntaxError.o ${OBJECTDIR}/src/CFG/SYN/SyntaxError_nomain.o;\
 	fi
@@ -327,7 +327,7 @@ ${OBJECTDIR}/src/CFG/Value_nomain.o: ${OBJECTDIR}/src/CFG/Value.o src/CFG/Value.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Value_nomain.o src/CFG/Value.cpp;\
+	    $(COMPILE.cc) -O2 -I. -I. -I. -I. -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/CFG/Value_nomain.o src/CFG/Value.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/CFG/Value.o ${OBJECTDIR}/src/CFG/Value_nomain.o;\
 	fi

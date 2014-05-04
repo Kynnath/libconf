@@ -18,19 +18,25 @@ namespace cfg
             : m_row ( i_row )
             , m_column ( i_column )
             , m_integerValue ( i_value )
+            , m_floatValue ()
             , m_type ( Token::e_Integer )
+            , m_boolValue ()
         {}
 
         Token::Token( int const& i_row, int const& i_column, float const& i_value )
             : m_row ( i_row )
             , m_column ( i_column )
+            , m_integerValue ()
             , m_floatValue ( i_value )
             , m_type ( Token::e_Float )
+            , m_boolValue ()
         {}
 
         Token::Token( int const& i_row, int const& i_column, bool const& i_value )
             : m_row ( i_row )
             , m_column ( i_column )
+            , m_integerValue ()
+            , m_floatValue ()
             , m_type ( Token::e_Bool )
             , m_boolValue ( i_value )
         {}
