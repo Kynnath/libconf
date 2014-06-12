@@ -43,7 +43,7 @@ namespace cfg
 
         void Scope::Print( int const& i_indent ) const
         {
-            std::cout << std::string( size_t(i_indent*4), ' ' ) << "[ " << m_name << " ]" << std::endl;
+            std::cout << std::string( std::size_t(i_indent*4), ' ' ) << "[ " << m_name << " ]" << std::endl;
             for ( auto const& expression : m_expressions )
             {
                 expression.Print( i_indent + 1 );
