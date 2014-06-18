@@ -21,7 +21,9 @@ namespace cfg
         Value const& GetProperty( std::string const& i_property, Value::Type const& i_type ) const;
 
         public:
+            Config();
             Config( std::string const& i_configFile );
+            void LoadConfiguration( std::string const& i_configFile );
             bool const& GetBoolProperty( std::string const& i_boolProperty ) const;
             int const& GetIntProperty( std::string const& i_intProperty ) const;
             float const& GetFloatProperty( std::string const& i_floatProperty ) const;

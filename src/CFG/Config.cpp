@@ -15,6 +15,18 @@
 
 namespace cfg
 {
+    Config::Config()
+    {}
+
+    Config::Config( std::string const& i_configFile )
+        : m_symbolTable { sem::BuildSymbolTable( syn::BuildSyntaxTree( lex::BuildTokenSequence( i_configFile ) ) ) }
+    {}
+
+    void Config::LoadConfiguration( std::string const& i_configFile )
+    {
+        m_symbolTable = sem::BuildSymbolTable( syn::BuildSyntaxTree( lex::BuildTokenSequence( i_configFile ) ) );
+    }
+
     Value const& Config::GetProperty( std::string const& i_property, Value::Type const& i_type ) const
     {
         auto const property ( m_symbolTable.find( i_property ) );
@@ -35,10 +47,6 @@ namespace cfg
             throw ConfigError ( ConfigError::e_MissingProperty );
         }
     }
-
-    Config::Config( std::string const& i_configFile )
-        : m_symbolTable ( sem::BuildSymbolTable( syn::BuildSyntaxTree( lex::BuildTokenSequence( i_configFile ) ) ) )
-    {}
 
     bool const& Config::GetBoolProperty( std::string const& i_boolProperty ) const
     {
