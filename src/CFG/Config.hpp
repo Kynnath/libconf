@@ -31,6 +31,8 @@ namespace cfg
       bool PropertyExists( std::string const& i_propertyName, Value::Type const& i_valueType ) const;
       std::map< std::string, Value >::iterator begin() noexcept;
       std::map< std::string, Value >::iterator end() noexcept;
+      std::map< std::string, Value >::const_iterator begin() const noexcept;
+      std::map< std::string, Value >::const_iterator end() const noexcept;
       std::map< std::string, Value >::const_iterator cbegin() const noexcept;
       std::map< std::string, Value >::const_iterator cend() const noexcept;
   };

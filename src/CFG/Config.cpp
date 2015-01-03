@@ -81,6 +81,16 @@ namespace cfg
     return std::end(m_symbolTable);
   }
   
+  std::map< std::string, Value >::const_iterator Config::begin() const noexcept
+  {
+    return m_symbolTable.begin();
+  }
+  
+  std::map< std::string, Value >::const_iterator Config::end() const noexcept
+  {
+    return m_symbolTable.end();
+  }
+  
   std::map< std::string, Value >::const_iterator Config::cbegin() const noexcept
   {
     return m_symbolTable.cbegin();
