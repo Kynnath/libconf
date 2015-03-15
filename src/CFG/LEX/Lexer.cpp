@@ -33,7 +33,7 @@ namespace cfg
 
         struct LexerData
         {
-            std::ifstream m_configFile;
+            std::ifstream & m_configFile;
             std::vector<Token> m_tokenSequence;
             std::string m_characterSequence;
             StateFunction m_currentState;
@@ -41,10 +41,10 @@ namespace cfg
             int m_column, m_columnFirst;
             char m_character;
 
-            LexerData( std::string const& i_configFile );
+            LexerData(std::ifstream & i_configFile);
         };
 
-        LexerData::LexerData( std::string const& i_configFile )
+        LexerData::LexerData(std::ifstream & i_configFile)
             : m_configFile ( i_configFile )
             , m_currentState ( Initial )
             , m_row ( 1 ), m_rowFirst ( 1 )
@@ -502,22 +502,34 @@ namespace cfg
             }
         }
 
-        std::vector<Token> BuildTokenSequence( std::string const& i_configFile )
-        {
-            LexerData data ( i_configFile );
+    std::vector<Token> BuildTokenSequence( std::string const& i_configFile )
+    {
+      std::ifstream configFile ( i_configFile );
 
-            if ( !data.m_configFile.good() )
-            {
-                throw LexerError( LexerError::e_MissingFile, 0, 0 );
-            }
+      if ( !configFile.good() )
+      {
+        throw LexerError( LexerError::e_MissingFile, 0, 0 );
+      }
 
-            while ( data.m_currentState )
-            {
-                data.m_currentState( data );
-            }
-
-            return data.m_tokenSequence;
-        }
+      return BuildTokenSequence(configFile);
     }
+
+    std::vector<Token> BuildTokenSequence(std::ifstream & i_configFile)
+    {
+      if ( !i_configFile.good() )
+      {
+        throw LexerError( LexerError::e_MissingFile, 0, 0 );
+      }
+
+      LexerData data ( i_configFile );
+
+      while ( data.m_currentState )
+      {
+        data.m_currentState( data );
+      }
+
+      return data.m_tokenSequence;
+    }
+  }
 }
 

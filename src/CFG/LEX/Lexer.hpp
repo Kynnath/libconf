@@ -13,13 +13,11 @@
 
 namespace cfg
 {
-    namespace lex
-    {
-
-        std::vector<Token> BuildTokenSequence( std::string const& i_configFile );
-
-
-    }
+  namespace lex
+  {
+    std::vector<Token> BuildTokenSequence(std::string const& i_configFile);
+    std::vector<Token> BuildTokenSequence(std::ifstream & i_configFile);
+  }
 }
 
 #endif	/* LEXER_HPP */

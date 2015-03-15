@@ -19,6 +19,10 @@ namespace cfg
     : m_symbolTable { sem::BuildSymbolTable( syn::BuildSyntaxTree( lex::BuildTokenSequence( i_configFile ) ) ) }
   {}
 
+  Config::Config(std::ifstream & i_configFile)
+    : m_symbolTable { sem::BuildSymbolTable(syn::BuildSyntaxTree(lex::BuildTokenSequence(i_configFile))) }
+  {}
+
   void Config::LoadConfiguration( std::string const& i_configFile )
   {
     m_symbolTable = sem::BuildSymbolTable( syn::BuildSyntaxTree( lex::BuildTokenSequence( i_configFile ) ) );
@@ -70,32 +74,32 @@ namespace cfg
     auto const property ( m_symbolTable.find( i_propertyName ) );
     return ( property != m_symbolTable.end() && i_valueType == property->second.GetType() );
   }
-  
+
   std::map< std::string, Value >::iterator Config::begin() noexcept
   {
     return std::begin(m_symbolTable);
   }
-  
+
   std::map< std::string, Value >::iterator Config::end() noexcept
   {
     return std::end(m_symbolTable);
   }
-  
+
   std::map< std::string, Value >::const_iterator Config::begin() const noexcept
   {
     return m_symbolTable.begin();
   }
-  
+
   std::map< std::string, Value >::const_iterator Config::end() const noexcept
   {
     return m_symbolTable.end();
   }
-  
+
   std::map< std::string, Value >::const_iterator Config::cbegin() const noexcept
   {
     return m_symbolTable.cbegin();
   }
-  
+
   std::map< std::string, Value >::const_iterator Config::cend() const noexcept
   {
     return m_symbolTable.cend();
